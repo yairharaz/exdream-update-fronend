@@ -1,0 +1,186 @@
+.home-page {
+    .el-icon-star-on:before {
+        color: #1e72e0;
+    }
+    .hero-img {
+        background-image: url(https://images.unsplash.com/photo-1493224533326-630c89563300?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80);
+        height: 80vh;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 30px;
+        .welcome {
+            position: absolute;
+            top: 70px;
+            right: 30px;
+            .welcome-txt {
+                font-size: 18px;
+                font-weight: bold;
+                text-align: center;
+            }
+        }
+        .app-title {
+            text-align: center;
+            width: 60%;
+            margin: 45px;
+            color: #002656;
+            h1 {
+                font-size: 70px;
+                font-family: PassionRegular;
+            }
+            h2 {
+                font-family: PassionRegular;
+                font-size: 36px;
+                text-transform: capitalize;
+            }
+        }
+        .search-container {
+            height: 30px;
+            // margin-top: 40px;
+            display: flex;
+            input {
+                outline: none;
+                border: 0;
+                border-top-left-radius: 10px;
+                border-bottom-left-radius: 10px;
+                font-size: 17px;
+                height: 40px;
+                width: 320px;
+                padding: 1rem 0rem 1rem 1rem;
+            }
+            .search-btn {
+                height: 40px;
+                border: 0;
+                font-size: 17px;
+                border-top-right-radius: 10px;
+                border-bottom-right-radius: 10px;
+                background-color: #1e72e0;
+                color: #fff;
+                margin: 0;
+                padding: 1px 12px;
+            }
+        }
+    }
+    .cards-container {
+        display: flex;
+        flex-direction: column;
+        max-width: 1200px;
+        margin: 0 auto;
+        // padding-inline-end: 8px;
+        padding: 0;
+        .type-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding: 0 8px;
+            button {
+                background-color: white;
+                text-decoration: underline;
+                transition: 0.12s;
+                &:hover {
+                    color: rgb(28, 116, 232);
+                }
+            }
+        }
+        .exp-list {
+            display: flex;
+            margin-bottom: 50px;
+        }
+    }
+
+    @include for-wide-XL-layout {
+        .cards-container {
+            max-width: 980px;
+            .type-container {
+                padding: 0 1.15%;
+            }
+            .exp-list {
+                .exp-preview {
+                    width: 31%;
+                    margin-inline-start: 1.15%;
+                    margin-inline-end: 1.15%;
+                }
+            }
+        }
+    }
+    @include for-wide-layout {
+        .cards-container {
+            max-width: 700px;
+            .type-container {
+                padding: 0 2%;
+            }
+            .exp-list {
+                .exp-preview {
+                    width: 46%;
+                    margin-inline-start: 2%;
+                    margin-inline-end: 2%;
+                }
+            }
+        }
+    }
+    @include for-normal-layout {
+        .cards-container {
+            max-width: 600px;
+        }
+    }
+    @include for-narrow-layout {
+        .hero-img {
+            height: 70vh;
+            .search-container {
+                width: 75%;
+                input {
+                    font-size: 15px;
+                }
+            }
+            .app-title {
+                width: 72%;
+                h1 {
+                    font-size: 60px;
+                }
+            }
+        }
+        .cards-container {
+            max-width: 450px;
+            .type-container {
+                padding: 0 4%;
+            }
+            .exp-list {
+                margin-bottom: 0;
+                .exp-preview {
+                    width: 92%;
+                    margin-inline-start: 4%;
+                    margin-inline-end: 4%;
+
+                    height: 360px;
+                    .exp-preview-img {
+                        height: 270px;
+                    }
+                    .exp-preview-title-seller {
+                        .preview-creator {
+                            font-size: 12px;
+                        }
+                    }
+                    .exp-preview-type-ticket {
+                        .exp-type {
+                            font-size: 17px;
+                        }
+                        .preview-left {
+                            font-size: 14px;
+                        }
+                    }
+                    .exp-preview-desc {
+                        font-size: 16px;
+                        min-height: 41px;
+                    }
+                    .exp-price {
+                        font-size: 19px;
+                    }
+                }
+            }
+        }
+    }
+}

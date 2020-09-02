@@ -1,0 +1,12 @@
+.exp-list {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    // justify-content: space-between;l
+    .exp-preview {
+        width: 23.7%;
+        height: 325px;
+        margin-bottom: 40px;
+    }
+   
+}

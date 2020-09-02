@@ -1,0 +1,81 @@
+.exp-app {
+    margin: 0 auto;
+    max-width: 1200px;
+    padding: 0 15px;
+    min-height: 76.9vh;
+    .app-title {
+        margin-top: 85px;
+        margin-bottom: 20px;
+        font-size: 40px;
+        margin-inline-start: 7px;
+    }
+    @include for-wide-XL-layout{
+        max-width: 980px;
+            .exp-list {
+                .exp-preview {
+                    width: 31%;
+                    margin-inline-start: 1.15%;
+                    margin-inline-end: 1.15%;
+                }
+            }
+
+    }
+    @include for-wide-layout {
+        max-width: 700px;
+            .exp-list {
+                .exp-preview {
+                    width: 47%;
+                    margin-inline-start: 1.5%;
+                    margin-inline-end: 1.5%;
+                }
+            }
+        
+    }
+    @include for-normal-layout {
+            max-width: 600px;
+            .exp-preview-desc {
+                font-size: 13px;
+                min-height: 36px;
+              
+            }
+    }
+    @include for-narrow-layout {
+        max-width: 400px;
+        .app-title {
+            font-size: 25px;
+            margin-inline-start: 15px;
+        }
+        .exp-list {
+            flex-direction: column;
+            .exp-preview {
+                width: 92%;
+                margin-inline-start: 4%;
+                margin-inline-end: 4%;
+                height: 360px;
+                .exp-preview-img {
+                    height: 270px;
+                }
+                .exp-preview-title-seller {
+                    .preview-creator {
+                        font-size: 12px;
+                    }
+                }
+                .exp-preview-type-ticket {
+                    .exp-type {
+                        font-size: 17px;
+                    }
+                    .preview-left {
+                        font-size: 14px;
+                    }
+                }
+                .exp-preview-desc {
+                    font-size: 16px;
+                    min-height: 41px;
+                }
+                .exp-price {
+                    font-size: 19px;
+                }
+            }
+        }
+    }
+}

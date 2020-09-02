@@ -1,0 +1,119 @@
+.exp-filter {
+    margin-bottom: 18px;
+    margin-inline-start: 7px;
+    .screen {
+        top: 0;
+        left: 0;
+        position: fixed;
+        z-index: 1;
+        height: 100vh;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.151);
+        transition: 0.3s;
+    }
+    .filter-btn {
+        font-size: 15px;
+        position: relative;
+        z-index: 5;
+        padding: 8px 22px;
+        background-color: #ffffff;
+        margin: 0;
+        margin-inline-end: 20px;
+        border-radius: 99px;
+        border: 0.5px solid lightgray;
+        line-height: 18px;
+        font-weight: 400;
+        transition: 0.3s;
+        &:hover {
+            border: 0.5px solid #000000;
+        }
+        &.isActive {
+            border: 0.5px solid #000000;
+        }
+    }
+    .filter-modal {
+        max-width: 330px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: absolute;
+        top: 185px;
+        left: 50%;
+        transform: translate(-50%, 0%);
+        background-color: white;
+        padding: 10px;
+        z-index: 5;
+        border-radius: 10px;
+        border: 1px solid rgba(0, 0, 0, 0.3);
+        -webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+        -moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+        -webkit-background-clip: padding-box;
+        -moz-background-clip: padding-box;
+        background-clip: padding-box;
+        .save-filter-btn {
+            font-size: 15px;
+            border-radius: 13px;
+            padding: 8px 22px;
+            margin: 0;
+            border: none;
+            background-color: #1e72e0;
+            color: white;
+            transition: 0.15s;
+            &:hover {
+                background-color: #115aba;
+            }
+        }
+        .label-container {
+            display: flex;
+            flex-wrap: wrap;
+            width: 100%;
+            align-items: center;
+            margin: 8px 0;
+            padding: 12px 0;
+            border-top: 1px solid #b3adad;
+            border-bottom: 1px solid #b3adad;
+            label {
+                padding: 3px 8px;
+                margin: 4px 5px;
+                border-radius: 3px;
+                border: 1px solid white;
+                line-height: 26px;
+                transition: 0.15s;
+                &:hover {
+                    cursor: pointer;
+                    font-weight: bold;
+                }
+            }
+            input[type="radio"]:checked + label {
+                font-weight: bold;
+                border: 1px solid black;
+            }
+            input[type="checkbox"]:checked + label {
+                font-weight: bold;
+                border: 1px solid black;
+            }
+        }
+        h2 {
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .seasons-filter , .more-filters{
+        padding-top: 8px;
+        }
+    }
+    @include for-narrow-layout {
+        width: 92%;
+        margin-inline-start: 4%;
+        margin-inline-end: 4%;
+        .filter-modal {
+            width: 96%;
+            position: fixed;
+        }
+        .filter-btn {
+            padding: 5px 14px;
+            font-size: 11px;
+            margin-inline-end: 6px;
+        }
+    }
+}

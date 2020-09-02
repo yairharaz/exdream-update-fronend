@@ -1,0 +1,25 @@
+button {
+    border: none;
+    // padding: 1rem 2rem;
+    // margin: 0;
+    text-decoration: none;
+    cursor: pointer;
+    // &:hover, button:focus {
+    //     opacity: 0.8;
+    //     transition: opacity .3S ease-in-out;
+    // }
+    &:focus {
+        outline: none;
+        outline-offset: -4px;
+    }
+
+}
+
+// button:hover, button:focus {
+//     border: none;
+//     box-shadow: grey;
+// }
+// button:focus {
+//     outline: none;
+//     outline-offset: -4px;
+// }

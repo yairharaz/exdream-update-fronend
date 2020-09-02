@@ -1,0 +1,45 @@
+.el-date-table {
+
+    td {
+        &.current:not(.disabled) {
+            span {
+                background-color: #4f94d6;
+            }
+        }
+        &.today {
+            span {
+                color: #4f94d6;
+                font-weight: 700;
+            }
+        }
+        // &.available:hover {
+        //     border-radius: 50%;
+        //     border: 2px solid black;
+        // }
+        &.next-month{
+           display: none;
+        }
+        &.prev-month {
+           visibility: hidden;
+
+        }
+    }
+
+}
+
+
+
+.el-input__icon {
+    color: lightgray;
+}
+.el-icon-date:before {
+    content: "\e78e";
+    color: lightgray;
+}
+
+.el-icon-d-arrow-right:before {
+    content: "";
+}
+.el-icon-d-arrow-left:before {
+    content: "";
+}

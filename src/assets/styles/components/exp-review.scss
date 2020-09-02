@@ -1,0 +1,27 @@
+.exp-review{
+    width: 50%;
+    margin: 20px 0;
+    .reviewer-container-wraper{
+        display: flex;
+        align-items: center;
+        .reviewer-img{
+            margin-inline-end: 10px;
+        }
+        .reviewer-container{
+            display: flex;
+            flex-direction: column;
+            font-size: 12px;
+            line-height: 16px;
+            .review-date{
+                color: lightgray
+            }
+        }
+    }
+    .review-txt{
+        margin-inline-end: 20px;
+        line-height: 20px;
+        margin-top: 10px;
+        font-size: 14px;    
+    }
+}
+

@@ -1,0 +1,194 @@
+.app-header {
+    font-size: 14px;
+    top: 0;
+    position: absolute;
+    height: 55px;
+    background-color: #ffffff40;
+    width: 100%;
+    padding: 0 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 3px 2px -1.2px rgba(0, 0, 0, 0.2);
+    .hamburger {
+        display: none;
+    }
+    img {
+        width: 115px;
+        position: relative;
+        top: 5px;
+    }
+
+    // a {
+    // color: white;
+    // color: #73787d;
+    // font-size: 14px;
+    // letter-spacing: 0.5px;
+    // cursor: pointer;
+    //     &:hover {
+    //         color: #333;
+    //     }
+    // }
+    .logo {
+        max-width: 240px;
+    }
+    .router-header > * {
+        margin-inline-start: 20px;
+    }
+    .router-header {
+        display: flex;
+        align-items: center;
+        .bell-btn {
+            height: 100%;
+            font-size: 22px;
+            position: relative;
+            top: 7.5px;
+            .msg {
+                visibility: hidden;
+                width: 13px;
+                height: 15px;
+                position: relative;
+                background-color: red;
+                left: 10px;
+                bottom: 27px;
+                border-radius: 3px;
+                color: white;
+                font-size: 13px;
+                font-weight: bold;
+                &.visible {
+                    visibility: visible;
+                }
+            }
+        }
+    }
+    .bell-btn.mobile {
+        display: none;
+    }
+    button {
+        color: #73787d;
+        font-size: 14px;
+        letter-spacing: 0.5px;
+        background-color: transparent;
+        cursor: pointer;
+        &:hover {
+            color: #333;
+        }
+    }
+    .active {
+        color: #333;
+    }
+
+    .msg-to-seller {
+        z-index: 9999;
+        position: absolute;
+        background-color: white;
+        border: 1px solid black;
+        border-radius: 8px;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), -4px 8px 11px rgba(0, 0, 0, 0.23);
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 18px;
+        width: 285px;
+        .user-container {
+            display: flex;
+            align-items: center;
+            margin: 0;
+            font-size: 17px;
+            .user-name{
+                line-height: 20px;
+                padding-top: 10px;
+                margin-inline-start: 5px;
+            }
+        }
+        button {
+            font-size: 18px;
+            margin: 0;
+            align-self: flex-end;
+            background-color: lightgray;
+            padding: 3px 10px;
+            border-radius: 3px;
+            color: white;
+        }
+        .user-img {
+            height: 30px;
+            width: 30px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+    }
+    @include for-narrow-layout {
+        .screen {
+            position: fixed;
+            width: 100%;
+            height: 100vh;
+            top: 0;
+            left: 0;
+            background-color: rgba(0, 0, 0, 0.308);
+            z-index: 11;
+        }
+        .router-header {
+            display: flex;
+            flex-direction: column;
+            top: 0;
+            right: 0;
+            height: 100vh;
+            z-index: 12;
+            width: 55%;
+            background-color: #021e43;
+            justify-content: flex-start;
+            align-items: center;
+            transform: translateX(100%);
+            transition: 0.8s;
+            &.openMenu {
+                transform: translateX(0);
+            }
+            a {
+                font-size: 26px;
+                margin: 24px 0;
+            }
+            button {
+                font-size: 26px;
+                margin: 24px 0;
+            }
+        }
+        .hamburger {
+            display: block;
+            font-size: 30px;
+        }
+        .router-header {
+            position: fixed;
+        }
+        .mobil-container{
+            display: flex;
+        }
+        .bell-btn {
+            display: none;
+        }
+        .bell-btn.mobile {
+            margin-inline-end: 10px;
+            display: block;
+            height: 100%;
+            font-size: 22px;
+            position: relative;
+            top: 7.5px;
+            .msg {
+                visibility: hidden;
+                width: 13px;
+                height: 15px;
+                position: relative;
+                background-color: red;
+                left: 10px;
+                bottom: 27px;
+                border-radius: 3px;
+                color: white;
+                font-size: 13px;
+                font-weight: bold;
+                &.visible {
+                    visibility: visible;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,29 @@
+.about {
+    text-align: left;
+
+    background-image: url("https://wallpapercave.com/wp/P3zjpI3.jpg");
+    height: 85vh; /* You must set a specified height */
+    @include img-background-cover-center;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    h2 {
+        position: relative;
+        animation-name: example;
+        animation-duration: 2s;
+        padding: 120px 650px 0px 50px;
+        color: rgb(3, 1, 1);
+    }
+}
+
+@keyframes example {
+    0% {
+        left: 0px;
+        top: -200px;
+    }
+    100% {
+
+        left: 0px;
+        top: 0px;
+    }
+}
