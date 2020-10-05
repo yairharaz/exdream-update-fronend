@@ -20,7 +20,7 @@
                 </div>
             </div>
             <div class="img-container">
-                <img v-for="img in exp.imgUrls" :src="img" alt />
+                <img v-for="(img, idx) in exp.imgUrls" :key="idx" :src="img" alt />
             </div>
             <h5 class="exp-details-shortDesc">{{exp.shortDesc}}</h5>
             <div class="exp-details-main">

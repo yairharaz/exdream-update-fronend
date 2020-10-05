@@ -50,7 +50,7 @@
         />
       </label>
       <div class="exp-edit-imgs-container">
-        <div class="exp-edit-imgs" v-for="(img, idx ) in expToEdit.imgUrls">
+        <div class="exp-edit-imgs" v-for="(img, idx) in expToEdit.imgUrls" :key="idx">
           <img :src="img" style="height: 50px; width: 50px;" />
           <button @click.prevent="deleteImg(idx)"><i class="el-icon-delete"></i></button>
         </div>

@@ -1,4 +1,3 @@
-
 <template>
   <div class="exp-book">
     <p class="exp-book-price-header">
@@ -16,7 +15,7 @@
     <p class="exp-book-price">{{bookPrice}}</p>
     </div>
     <p class="book-bless" v-if="bookingIsDone">Thank you for buying!</p>
-    <el-button  :class="{offbooked: isBooking}" class="book-btn" @click.once="book" >
+    <el-button :class="{offbooked: isBooking}" class="book-btn" @click.once="book" >
       <span v-if="show">{{bookBtnTxt}}</span>
       <i v-else class="el-icon-loading"></i>
     </el-button>
@@ -24,9 +23,8 @@
 </template>
 
 <script>
-import datePicker from "./date-picker.vue";
-import selectCapacity from "./select-capacity.vue";
 
+import selectCapacity from "./select-capacity.vue";
 
 export default {
   props: ["exp"],
@@ -72,7 +70,6 @@ export default {
     },
   },
   components: {
-    datePicker,
     selectCapacity
   },
   created() {

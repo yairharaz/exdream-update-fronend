@@ -96,12 +96,15 @@ export default {
     async created() {
         window.scrollTo(0,0);
         this.getNumOfCard()
-        window.addEventListener("resize", ()=> {
-          this.getNumOfCard()
-        });
+
+        window.addEventListener("resize",this.getNumOfCard);
+        
         this.bestDeals = await this.getExps({sortBy : 'currPrice'});
         this.popSki = await this.getExps({type : 'Ski'});
         this.inAsia = await this.getExps({tags : ['Asia']});
+    },
+    destroyed(){
+        window.removeEventListener("resize", this.getNumOfCard , false);
     },
     components: {
         expList
