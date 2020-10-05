@@ -35,6 +35,7 @@
                     <p v-if="readMore" class="exp-details-desc">{{exp.desc7}}</p>
                     <button v-if="!readMore" @click.prevent="toggleMoreReading" class="show-hide-desc-btn">Read More...</button>
                     <button v-else class="show-hide-desc-btn" @click="toggleMoreReading">Hide...</button>
+                    <button  class="edit-exp-btn" @click.prevent="editExp">Edit Experience</button>
                 </div>
                 <exp-book @booking="booking" :exp="exp" />
             </div>
@@ -120,6 +121,9 @@ export default {
         },
         toggleReview(){
             this.isHide = !this.isHide
+        },
+        editExp(){
+            this.$router.push(`/exp/edit/${this.exp._id}`);
         }
     },
     async created() {

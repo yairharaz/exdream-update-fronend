@@ -92,6 +92,7 @@
         border-bottom: 1px solid lightgray;
         margin-bottom: 25px;
         .exp-details-desc {
+            white-space: break-spaces;
             margin-top: 10px;
         }
         .exp-descs-container {
@@ -105,6 +106,21 @@
                 color: white;
                 transition: 0.15s;
                 margin: 14px 0;
+                &:hover {
+                    background-color: #115aba;
+                }
+            }
+            .edit-exp-btn {
+                font-size: 13px;
+                border-radius: 13px;
+                padding: 8px 18px;
+                margin: 0;
+                border: none;
+                background-color: #1e72e0;
+                color: white;
+                transition: 0.15s;
+                margin: 14px 0;
+                margin-inline-start: 10px;
                 &:hover {
                     background-color: #115aba;
                 }
