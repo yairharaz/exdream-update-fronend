@@ -301,13 +301,6 @@ export default {
                 this.expToEdit.createdBy.imgUrl = this.loggedinUser.imgUrl;
                 this.expToEdit.createdBy.info = this.loggedinUser.info;
             }
-            delete this.expToEdit.desc1
-            delete this.expToEdit.desc2
-            delete this.expToEdit.desc3
-            delete this.expToEdit.desc4
-            delete this.expToEdit.desc5
-            delete this.expToEdit.desc6
-            delete this.expToEdit.desc7
             this.expToEdit.tags = this.value1;
             await this.$store.dispatch({
                 type: "saveExp",
