@@ -96,7 +96,7 @@ export default {
           {id: 'Hawaii' , txt: 'Hawaii'},
           {id: 'Israel' , txt: 'Israel'},
           {id: 'Italy' , txt: 'Italy'},
-          {id: 'South-africa' , txt: 'South Africa'},
+          {id: 'South Africa' , txt: 'South Africa'},
           {id: 'Switzerland' , txt: 'Switzerland'},
           {id: 'Thailand' , txt: 'Thailand'},
           {id: 'USA' , txt: 'USA'}
@@ -182,8 +182,6 @@ export default {
        this.filterBy.tags.splice(idx , 1)
       }
     }
-  },
-  created() {
   },
 }
 
