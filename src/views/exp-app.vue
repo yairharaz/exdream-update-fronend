@@ -35,15 +35,6 @@ export default {
                 type: "loadExps"
             });
         },
-
-        makeId(l = 7) {
-            var text = "";
-            var char_list = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-            for (var i = 0; i < l; i++) {
-                text += char_list.charAt(Math.floor(Math.random() * char_list.length));
-            }
-            return text;
-        }
     },
     created() {
         window.scrollTo(0, 0);
