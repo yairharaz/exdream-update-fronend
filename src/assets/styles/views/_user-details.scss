@@ -48,6 +48,10 @@
       }
     }
   }
+  .charts-container{
+    display: flex;
+    justify-content: space-around;
+  }
   .user-order-activities {
     // display: flex;
     // justify-content: space-between;

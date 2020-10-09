@@ -68,13 +68,13 @@
                     />
                 </ul>
                 <p v-else>No reviews have been got yet</p>
-                <button
+                <a href="#"
                     @click.prevent="toggleReview"
                     v-if="isHide"
                     class="show-hide-review-btn"
                 >
                     Show more...
-                </button>
+                </a>
                 <button
                     @click="toggleReview"
                     v-else
@@ -155,8 +155,9 @@ export default {
             this.readMore = !this.readMore;
             if (!this.readMore) window.scroll(0, 420);
         },
-        toggleReview() {
+        toggleReview(ev) {
             this.isHide = !this.isHide;
+            if(this.isHide) window.scroll(0, 730)
         },
         editExp() {
             this.$router.push(`/exp/edit/${this.exp._id}`);
