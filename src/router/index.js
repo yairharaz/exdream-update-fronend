@@ -55,7 +55,7 @@ const routes = [
     component: userSignup
   },
   {
-    path: '/order/:id',
+    path: '/order/:id?',
     name: 'review-details',
     component: reviewDetails
   },

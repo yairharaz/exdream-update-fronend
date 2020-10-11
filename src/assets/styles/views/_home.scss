@@ -1,4 +1,13 @@
 .home-page {
+    // .loading{
+    //     text-align: center;
+    //     font-size: 100px;
+    // }
+    .fade-loader{
+        width: 400px;
+        height: 200px;
+        margin: 0 auto;
+    }
     .el-icon-star-on:before {
         color: #1e72e0;
     }
