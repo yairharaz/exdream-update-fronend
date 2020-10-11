@@ -1,5 +1,6 @@
 <template>
 <section class="home-page">
+    <fade-loader :loading="('loading')" :color="('blue')" :height="('200')" :width="('200')"></fade-loader>
     <div class="hero-img">
         <div class="welcome" v-if="loggedinUser">
             <h4 class="welcome-txt">Welcome </h4>
@@ -43,6 +44,7 @@
 <script>
 import expList from "../components/exp-list.vue";
 import socket from "../services/socket.service.js";
+import fadeLoader from 'vue-spinner/src/FadeLoader.vue';
 
 export default {
     name: "Home-page",
@@ -126,7 +128,8 @@ export default {
         window.removeEventListener("resize", this.getNumOfCard, false);
     },
     components: {
-        expList
+        expList,
+        fadeLoader
     },
 };
 </script>
