@@ -8,7 +8,6 @@ import userDetails from '../views/user-details.vue'
 import expEdit from '../views/exp-edit.vue'
 import expDetails from '../views/exp-details.vue'
 import expApp from '../views/exp-app.vue'
-import reviewDetails from '../views/review-details.vue'
 // import userProfile from '../views/user-profile.vue'
 
 Vue.use(VueRouter)
@@ -53,13 +52,7 @@ const routes = [
     path: '/signup',
     name: 'user-signup',
     component: userSignup
-  },
-  {
-    path: '/order/:id?',
-    name: 'review-details',
-    component: reviewDetails
-  },
-
+  }
 ]
 
 const router = new VueRouter({

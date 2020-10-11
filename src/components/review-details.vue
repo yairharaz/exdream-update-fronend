@@ -24,12 +24,8 @@
                     <el-option value="5">5</el-option>
                 </el-select>
             </label>
-            <button class="btn-save">Save</button>
-            <button
-                type="button"
-                @click="hasHistory() ? $router.go(-1) : $router.push('/')"
-                class="btn-back"
-            >
+            <button class="btn-save" @click="closeModal">Save</button>
+            <button type="button" @click="closeModal" class="btn-back">
                 &laquo; Back
             </button>
         </form>
@@ -40,12 +36,12 @@
 <script>
 import { reviewService } from "../services/review.service.js";
 import { expService } from "../services/exp.service.js";
+import { userService } from "../services/user.service.js";
 export default {
     name: "review-details",
     data() {
         return {
             exp: null,
-            loggedinUser: "",
             review: {
                 by: {
                     _id: "",
@@ -60,24 +56,32 @@ export default {
     },
     methods: {
         setUserData() {
-            this.review.by._id = this.loggedinUser._id;
-            this.review.by.fullName = this.loggedinUser.fullName;
-            this.review.by.imgUrl = this.loggedinUser.imgUrl;
+            if (this.$store.getters.loggedinUser) {
+                const {
+                    _id,
+                    fullName,
+                    imgUrl,
+                } = this.$store.getters.loggedinUser;
+                this.review.by = { _id, fullName, imgUrl };
+                // this.review.by = this.$store.getters.loggedinUser;
+                console.log(this.review);
+            } else {
+                const { _id, fullName, imgUrl } = userService.getGuestUser();
+                this.review.by = { _id, fullName, imgUrl };
+            }
         },
         async saveReview() {
             if (!this.review.txt || !this.review.rate) return;
             this.review.rate = +this.review.rate;
             this.exp.reviews.push(this.review);
             await expService.update(this.exp);
-            this.$router.push(`/user/${this.review.by._id}`);
         },
-        hasHistory() {
-            return window.history.length > 2;
+        closeModal() {
+            this.$emit("closeModal");
         },
     },
     async created() {
         var expId = this.$route.params.id;
-        this.loggedinUser = this.$store.getters.loggedinUser;
         this.exp = await expService.getById(expId);
         this.setUserData();
     },

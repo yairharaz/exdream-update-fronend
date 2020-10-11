@@ -52,16 +52,16 @@
             </div>
             <exp-list v-if="inAsia" :exps="inAsiaToShow" />
         </div>
-        <!-- <div v-else class="loading">Loading...</div> -->
+        <div class="fade-loader-container">
         <fade-loader
-            class="fade-loader"
-            
+            class="fade-loader" 
             :loading="loading"
             :radius="radius"
             :color="color"
             :height="height"
             :width="width"
         ></fade-loader>
+        </div>
     </section>
 </template>
 

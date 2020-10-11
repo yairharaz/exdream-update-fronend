@@ -38,7 +38,6 @@
 <script>
 import { expService } from "../services/exp.service.js";
 import { userService } from "../services/user.service.js";
-import reviewDetails from "./review-details.vue";
 import userOrdersTable from "../components/user-orders-table.vue";
 import barChart from "../components/bar-chart.vue";
 import doughnutChart from "../components/doughnut-chart.vue";
@@ -93,7 +92,6 @@ export default {
         this.loadUser(userId);
     },
     components: {
-        reviewDetails,
         barChart,
         doughnutChart,
         userOrdersTable
