@@ -1,5 +1,5 @@
-.review-details{
-    min-height:80vh ;
+.review-details {
+    min-height: 80vh;
     margin-top: 85px;
     display: flex;
     flex-direction: column;
@@ -9,9 +9,30 @@
     margin-top: 65px;
     padding-top: 10px;
     margin-bottom: 10px;
-    .rate-selector{
+    h2{
+        text-align: center;
+        margin-bottom: 10px;
+    }
+    .rate-selector {
         margin: 20px 0;
         max-width: 170px;
+    }
+    .add-review-form{
+        max-width: 300px;
+        margin: 0 auto;
+        // *> {
+        //     text-align: center;
+        // }
+        .review-el-input {
+            textarea{
+                min-height: 32.9907px;
+                max-width: 300px;
+                margin-top: 0px;
+                margin-bottom: 0px;
+                height: 200px;
+                resize: none;
+            }
+        }
     }
     .btn-save {
         display: block;
@@ -47,5 +68,4 @@
             background-color: #3f444b;
         }
     }
-
 }

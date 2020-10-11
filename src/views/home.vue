@@ -1,10 +1,9 @@
 <template>
 <section class="home-page">
-    <fade-loader :loading="('loading')" :color="('blue')" :height="('200')" :width="('200')"></fade-loader>
     <div class="hero-img">
         <div class="welcome" v-if="loggedinUser">
-            <h4 class="welcome-txt">Welcome </h4>
-            <h4 class="welcome-txt">{{loggedinUser.fullName}}</h4>
+            <h4 class="welcome-txt">Welcome</h4>
+            <h4 class="welcome-txt">{{ loggedinUser.fullName }}</h4>
         </div>
         <div class="app-title">
             <h1 class="ex-dream">ExDream</h1>
@@ -16,28 +15,32 @@
                 <option v-for="type in expTypes" :key="type" :value="type" />
             </datalist>
 
-            <button class="search-btn" @click="searchExp"><i class="fas fa-search"></i> </button>
+            <button class="search-btn" @click="searchExp">
+                <i class="fas fa-search"></i>
+            </button>
         </div>
-
     </div>
-    <div ref="cardsContainer" class="cards-container">
-
+    <div v-if="bestDeals && popSki && inAsia" ref="cardsContainer" class="cards-container">
         <div class="type-container">
             <h2>Best Deals</h2>
-            <button @click="goToExpApp({ sortBy: 'currPrice'})">See All</button>
+            <button @click="goToExpApp({ sortBy: 'currPrice' })">
+                See All
+            </button>
         </div>
         <exp-list v-if="bestDeals" :exps="bestDealsToShow" />
         <div class="type-container">
             <h2>Popular Ski Experience</h2>
-            <button @click="goToExpApp({ type: 'Ski'})">See All</button>
+            <button @click="goToExpApp({ type: 'Ski' })">See All</button>
         </div>
         <exp-list v-if="popSki" :exps="popSkiToShow" />
         <div class="type-container">
             <h2>Popular In Asia</h2>
-            <button @click="goToExpApp({ tags : ['Asia']})">See All</button>
+            <button @click="goToExpApp({ tags: ['Asia'] })">See All</button>
         </div>
         <exp-list v-if="inAsia" :exps="inAsiaToShow" />
     </div>
+    <!-- <div v-else class="loading">Loading...</div> -->
+    <fade-loader class="fade-loader" :loading="loading" :radius="radius" :color="color" :height="height" :width="width"></fade-loader>
 </section>
 </template>
 
@@ -50,48 +53,61 @@ export default {
     name: "Home-page",
     data() {
         return {
-            expTypes: ['Ski', 'Skydiving', 'Bunjee', 'Diving', 'Surffing', 'Rock Climb', 'Motorcross', 'Rappeling'],
+            expTypes: [
+                "Ski",
+                "Skydiving",
+                "Bunjee",
+                "Diving",
+                "Surffing",
+                "Rock Climb",
+                "Motorcross",
+                "Rappeling",
+            ],
             choosedType: null,
             bestDeals: null,
             popSki: null,
             inAsia: null,
             numOfCard: 2,
+            color: "blue",
+            height: 40 + "px",
+            width: 5 + "px",
+            radius: 100 + "px",
+            loading: true,
         };
     },
     computed: {
         bestDealsToShow() {
-            return this.bestDeals.slice(0, this.numOfCard)
+            return this.bestDeals.slice(0, this.numOfCard);
         },
         popSkiToShow() {
-            return this.popSki.slice(0, this.numOfCard)
+            return this.popSki.slice(0, this.numOfCard);
         },
         inAsiaToShow() {
-            return this.inAsia.slice(0, (this.numOfCard))
+            return this.inAsia.slice(0, this.numOfCard);
         },
         loggedinUser() {
-            return this.$store.getters.loggedinUser
-        }
+            return this.$store.getters.loggedinUser;
+        },
     },
     methods: {
         goToExpApp(filterBy) {
             this.$store.commit({
-                type: 'setFilter',
-                filterBy
+                type: "setFilter",
+                filterBy,
             });
-            this.$router.push('/exp');
+            this.$router.push("/exp");
         },
         searchExp() {
-            if (!this.choosedType) return
+            if (!this.choosedType) return;
             this.$store.commit({
-                type: 'setFilter',
+                type: "setFilter",
                 filterBy: {
-                    type: this.choosedType
-                }
+                    type: this.choosedType,
+                },
             });
-            this.$router.push('/exp');
+            this.$router.push("/exp");
         },
         getNumOfCard() {
-            console.log('layout')
             if (window.innerWidth > 1200) this.numOfCard = 4;
             else if (window.innerWidth > 960) this.numOfCard = 3;
             else if (window.innerWidth > 700) this.numOfCard = 2;
@@ -100,28 +116,28 @@ export default {
             filterBy.limit = 4;
             this.$store.commit({
                 type: "setFilter",
-                filterBy
+                filterBy,
             });
             await this.$store.dispatch({
-                type: "loadExps"
+                type: "loadExps",
             });
             return this.$store.getters.exps;
         },
     },
     async created() {
         window.scrollTo(0, 0);
-        this.getNumOfCard()
+        this.getNumOfCard();
 
         window.addEventListener("resize", this.getNumOfCard);
 
         this.bestDeals = await this.getExps({
-            sortBy: 'currPrice'
+            sortBy: "currPrice",
         });
         this.popSki = await this.getExps({
-            type: 'Ski'
+            type: "Ski",
         });
         this.inAsia = await this.getExps({
-            tags: ['Asia']
+            tags: ["Asia"],
         });
     },
     destroyed() {
