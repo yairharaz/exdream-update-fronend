@@ -60,6 +60,8 @@
                     <i class="el-icon-star-on"></i>
                     {{ averageRate }} ({{ exp.reviews.length }}) reviews
                 </p>
+                <button class="add-review-btn" @click.prevent="toggleReviewModal"> Add Review</button>
+                <review-details v-show="isModalOpen" @closeModal="toggleReviewModal"/>
                 <ul v-if="exp.reviews.length > 0" class="review-list">
                     <exp-review
                         v-for="review in expReviewsToShow"
@@ -104,6 +106,7 @@
 import { expService } from "../services/exp.service.js";
 import expBook from "../components/exp-book.vue";
 import expReview from "../components/exp-review.vue";
+import reviewDetails from "../components/review-details.vue"
 import socket from "../services/socket.service.js";
 import moment from "moment";
 
@@ -114,6 +117,7 @@ export default {
             exp: null,
             readMore: false,
             isHide: true,
+            isModalOpen: false
         };
     },
     computed: {
@@ -162,6 +166,9 @@ export default {
         editExp() {
             this.$router.push(`/exp/edit/${this.exp._id}`);
         },
+        toggleReviewModal(){
+            this.isModalOpen = !this.isModalOpen
+        }
     },
     async created() {
         window.scrollTo(0, 0);
@@ -175,6 +182,7 @@ export default {
     components: {
         expBook,
         expReview,
+        reviewDetails
     },
 };
 </script>

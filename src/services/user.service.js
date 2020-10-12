@@ -11,7 +11,7 @@ export const userService = {
 }
 
 
-function getGuestUser(booked) {
+function getGuestUser(booked = 0) {
     const user = {
         _id: makeId(),
         fullName: 'guest',

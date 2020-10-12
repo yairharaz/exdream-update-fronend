@@ -37,11 +37,17 @@
             <h2>Popular In Asia</h2>
             <button @click="goToExpApp({ tags: ['Asia'] })">See All</button>
         </div>
-        <exp-list v-if="inAsia" :exps="inAsiaToShow" />
-    </div>
-    <!-- <div v-else class="loading">Loading...</div> -->
-    <fade-loader class="fade-loader" :loading="loading" :radius="radius" :color="color" :height="height" :width="width"></fade-loader>
-</section>
+        <div class="fade-loader-container">
+        <fade-loader
+            class="fade-loader" 
+            :loading="loading"
+            :radius="radius"
+            :color="color"
+            :height="height"
+            :width="width"
+        ></fade-loader>
+        </div>
+    </section>
 </template>
 
 <script>
