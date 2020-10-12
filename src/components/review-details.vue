@@ -24,10 +24,12 @@
                     <el-option value="5">5</el-option>
                 </el-select>
             </label>
-            <button class="btn-save" @click="closeModal">Save</button>
-            <button type="button" @click="closeModal" class="btn-back">
-                &laquo; Back
-            </button>
+            <div class="review-btn-container">
+                <button type="button" @click="closeModal" class="btn-back btn">
+                    &laquo; Back
+                </button>
+                <button class="btn-save btn" @click="closeModal">Save</button>
+            </div>
         </form>
         <br />
     </section>

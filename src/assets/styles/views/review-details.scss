@@ -3,6 +3,8 @@
     margin-top: 85px;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     max-width: 790px;
     margin: 0 auto;
     padding-left: 10px;
@@ -34,38 +36,35 @@
             }
         }
     }
-    .btn-save {
-        display: block;
-        font-size: 15px;
-        width: 120px;
-        height: 45px;
-        border-radius: 13px;
-        padding: 8px 22px;
-        margin: 10px 0;
-        border: none;
-        color: white;
-        transition: 0.15s;
-        background-color: #1e72e0;
-        justify-self: flex-end;
-        &:hover {
-            background-color: #115aba;
+    .review-btn-container{
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+        .btn{
+            font-size: 15px;
+            width: 120px;
+            height: 45px;
+            border-radius: 13px;
+            padding: 8px 22px;
+            border: none;
+            color: white;
+            transition: 0.15s;
+            justify-self: flex-end;
+
         }
-    }
-    .btn-back {
-        margin-top: 5px;
-        font-size: 15px;
-        width: 120px;
-        height: 45px;
-        border-radius: 13px;
-        padding: 8px 22px;
-        margin-bottom: 5px;
-        border: none;
-        color: white;
-        transition: 0.15s;
-        background-color: #b6b7b9;
-        justify-self: flex-end;
-        &:hover {
-            background-color: #3f444b;
+        .btn-save {
+            // display: block;
+            
+            background-color: #1e72e0;
+            &:hover {
+                background-color: #115aba;
+            }
+        }
+        .btn-back {
+            background-color: #b6b7b9;
+            &:hover {
+                background-color: #3f444b;
+            }
         }
     }
 }

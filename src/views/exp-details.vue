@@ -1,6 +1,15 @@
 <template>
-    <section v-if="exp" class="exp-details">
-        <div class="exp-details-container">
+    <section class="exp-details">
+        <fade-loader
+            class="fade-loader"
+            :loading="loading"
+            :radius="'100px'"
+            :color="'#1e72e0'"
+            :height="'40px'"
+            :width="'5px'"
+        ></fade-loader>
+        <div v-if="isModalOpen" class="screen"></div>
+        <div v-if="exp" class="exp-details-container">
             <div class="exp-details-header">
                 <div class="exp-title-container">
                     <h4 class="exp-details-title">{{ exp.title }}</h4>
@@ -60,8 +69,17 @@
                     <i class="el-icon-star-on"></i>
                     {{ averageRate }} ({{ exp.reviews.length }}) reviews
                 </p>
-                <button class="add-review-btn" @click.prevent="toggleReviewModal"> Add Review</button>
-                <review-details v-show="isModalOpen" @closeModal="toggleReviewModal"/>
+                <button
+                    class="add-review-btn"
+                    @click.prevent="toggleReviewModal"
+                >
+                    Add Review
+                </button>
+                <review-details
+                    class="review-modal"
+                    v-show="isModalOpen"
+                    @closeModal="toggleReviewModal"
+                />
                 <ul v-if="exp.reviews.length > 0" class="review-list">
                     <exp-review
                         v-for="review in expReviewsToShow"
@@ -70,7 +88,8 @@
                     />
                 </ul>
                 <p v-else>No reviews have been got yet</p>
-                <a href="#"
+                <a
+                    href="#"
                     @click.prevent="toggleReview"
                     v-if="isHide"
                     class="show-hide-review-btn"
@@ -106,7 +125,8 @@
 import { expService } from "../services/exp.service.js";
 import expBook from "../components/exp-book.vue";
 import expReview from "../components/exp-review.vue";
-import reviewDetails from "../components/review-details.vue"
+import reviewDetails from "../components/review-details.vue";
+import fadeLoader from "vue-spinner/src/FadeLoader.vue";
 import socket from "../services/socket.service.js";
 import moment from "moment";
 
@@ -117,7 +137,8 @@ export default {
             exp: null,
             readMore: false,
             isHide: true,
-            isModalOpen: false
+            isModalOpen: false,
+            // loading: (this.exp)? false: true,
         };
     },
     computed: {
@@ -138,6 +159,9 @@ export default {
         },
         hideDesc() {
             return this.exp.desc.slice(0, 500) + "...";
+        },
+        loading() {
+            return this.exp ? false : true;
         },
     },
     methods: {
@@ -161,14 +185,14 @@ export default {
         },
         toggleReview(ev) {
             this.isHide = !this.isHide;
-            if(this.isHide) window.scroll(0, 730)
+            if (this.isHide) window.scroll(0, 730);
         },
         editExp() {
             this.$router.push(`/exp/edit/${this.exp._id}`);
         },
-        toggleReviewModal(){
-            this.isModalOpen = !this.isModalOpen
-        }
+        toggleReviewModal() {
+            this.isModalOpen = !this.isModalOpen;
+        },
     },
     async created() {
         window.scrollTo(0, 0);
@@ -182,7 +206,8 @@ export default {
     components: {
         expBook,
         expReview,
-        reviewDetails
+        reviewDetails,
+        fadeLoader,
     },
 };
 </script>

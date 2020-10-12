@@ -1,8 +1,14 @@
 .exp-app {
+    display: flex;
+    flex-direction: column;
     margin: 0 auto;
     max-width: 1200px;
     padding: 0 15px;
     min-height: 76.9vh;
+    .v-spinner {
+        align-self: center;
+        margin-top: 200px;
+    }
     .app-title {
         margin-top: 85px;
         margin-bottom: 20px;
