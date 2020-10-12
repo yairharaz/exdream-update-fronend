@@ -3,7 +3,7 @@ import { orderService } from '../services/order.service.js'
 
 export const expStore = {
   state: {
-    exps: [],
+    exps: null,
       filterBy: {}
   },
   getters: {
@@ -12,10 +12,10 @@ export const expStore = {
     }
   },
   mutations: {
-    updateExp(state, { currExp }) {
-      const idx = state.exps.findIndex((experience) => experience._id === currExp._id);
-      state.exps.splice(idx, 1, currExp);
-    },
+    // updateExp(state, { currExp }) {
+    //   const idx = state.exps.findIndex((experience) => experience._id === currExp._id);
+    //   state.exps.splice(idx, 1, currExp);
+    // },
     addExp(state, { exp }) {
       state.exps.push(exp);
     },
@@ -43,10 +43,10 @@ export const expStore = {
       await orderService.addOrder(booked, exp, user);
     },
     async saveExp({ commit }, { exp }) {
-      const type = (exp._id) ? 'updateExp' : 'addExp';
+      // const type = (exp._id) ? 'updateExp' : 'addExp';
       if (!exp._id) exp.date = Date.now();
       const currExp = await expService.saveExp(exp)
-      commit({ type, currExp })
+      // commit({ type, currExp })
       return currExp
     }
   }

@@ -1,19 +1,24 @@
 <template>
-<section class="exp-app exp-main">
-    <h2 class="app-title">Choose an Experience</h2>
-
-    <!-- <div class="hero-img">
-    <img src="" alt="Loading...">
-        </div>-->
-
-    <exp-filter @setFilter="setFilter" />
-    <exp-list :exps="exps" :loggedinUser="loggedinUser" />
-</section>
+    <section class="exp-app exp-main">
+        <h2 v-if="exps" class="app-title">Choose an Experience</h2>
+        <exp-filter v-if="exps" @setFilter="setFilter" />
+        <exp-list v-if="exps" :exps="exps" :loggedinUser="loggedinUser" />
+        <fade-loader
+            v-else
+            class="fade-loader"
+            :loading="true"
+            :radius="'100px'"
+            :color="'#1e72e0'"
+            :height="'40px'"
+            :width="'5px'"
+        ></fade-loader>
+    </section>
 </template>
 
 <script>
 import expList from "../components/exp-list.vue";
 import expFilter from "../components/exp-filter.vue";
+import fadeLoader from "vue-spinner/src/FadeLoader.vue";
 
 export default {
     name: "exp-app",
@@ -23,33 +28,33 @@ export default {
         },
         loggedinUser() {
             return this.$store.getters.loggedinUser;
-        }
+        },
     },
     methods: {
         setFilter(filterBy) {
             this.$store.commit({
                 type: "setFilter",
-                filterBy
+                filterBy,
             });
             this.$store.dispatch({
-                type: "loadExps"
+                type: "loadExps",
             });
         },
     },
     created() {
         window.scrollTo(0, 0);
         this.$store.dispatch({
-            type: "loadExps"
+            type: "loadExps",
         });
-
     },
     components: {
         expList,
-        expFilter
-    }
-}
+        expFilter,
+        fadeLoader,
+    },
+};
 
-// IF WE WONT TO DO CHANGE UN ALL ARRAY EXPS
+// IF WE WONT TO DO CHANGE IN ALL ARRAY EXPS
 
 // setTimeout(() => {
 
