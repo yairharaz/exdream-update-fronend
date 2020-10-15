@@ -19,7 +19,6 @@ async function getExps({ type = 'all-type', location = 'all-location', tags = []
   return await HttpService.get(`exp?type=${type}&location=${location}&tags=${tags}&sortBy=${sortBy}&userId=${userId}&limit=${limit}&skip=${skip}`)
 }
 
-
 async function getNumOfAllExps() {
   const numOfAllExps = await HttpService.get(`exp/num`)
   return numOfAllExps
