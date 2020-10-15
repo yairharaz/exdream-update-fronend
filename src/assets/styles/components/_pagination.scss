@@ -1,0 +1,25 @@
+.pagination{
+    margin: 0 auto;
+    display: flex;
+    margin-top: 100px;
+    border: 1.5px solid  #1e72e0;
+    border-radius: 5px;
+    li:not(:last-of-type){
+        border-right: 1.5px solid  #1e72e0;
+
+    }
+    li{
+        padding: 2px 9px;
+        &.active{
+            background-color: #d1d6dd7d;
+        }
+        &:hover{
+            background-color: #d1d6dd7d;
+        }
+        a{
+            color: #504658;
+            outline: none;
+        }
+    }
+    
+}

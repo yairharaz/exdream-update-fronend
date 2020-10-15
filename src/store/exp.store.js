@@ -1,14 +1,23 @@
 import { expService } from '../services/exp.service.js'
 import { orderService } from '../services/order.service.js'
 
+async function getNumOfAllExpsData() {
+  const numOfAllExps = await HttpService.get(`exp/num`)
+  return numOfAllExps
+}
+
 export const expStore = {
   state: {
     exps: null,
-      filterBy: {}
+    filterBy: {},
+    numOfAllExps: null
   },
   getters: {
     exps(state) {
       return state.exps
+    },
+    numOfAllExps(state){
+      return state.numOfAllExps
     }
   },
   mutations: {
@@ -19,21 +28,28 @@ export const expStore = {
     addExp(state, { exp }) {
       state.exps.push(exp);
     },
-    setFilter(state, { filterBy }){
+    setFilter(state, { filterBy }) {
       state.filterBy = filterBy;
     },
-    setExps(state, { exps }){
+    setExps(state, { exps }) {
       state.exps = exps
+    },
+    setNumOfAllExps(state , {numOfAllExps}){
+      state.numOfAllExps = numOfAllExps
     }
   },
   actions: {
-    async loadExps({ state ,commit }) {
+    async loadExps({ state, commit }) {
       try {
         const exps = await expService.getExps(state.filterBy)
-        commit({type: "setExps" , exps})
+        commit({ type: "setExps", exps })
       } catch (err) {
         console.log('ERR: ', err)
       }
+    },
+    async loadNumOfAllExps({ commit }) {
+      const numOfAllExps = await expService.getNumOfAllExps()
+      commit({ type: "setNumOfAllExps", numOfAllExps })
     },
     async removeExp({ commit }, { id }) {
       await expService.remove(id)
@@ -48,10 +64,13 @@ export const expStore = {
       const currExp = await expService.saveExp(exp)
       // commit({ type, currExp })
       return currExp
-    }
+    },
+
   }
 
 }
+
+
 
 
 
