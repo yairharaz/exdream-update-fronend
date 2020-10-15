@@ -1,17 +1,6 @@
 <template>
 	<section class="exp-app exp-main">
 
-
-           <paginate
-            v-if="exps"
-			:pageCount="pageCount"
-			:clickHandler="paging"
-			:prevText="'Prev'"
-			:nextText="'Next'"
-			:containerClass="'pagination'"
-		>
-		</paginate>
-
 		<h2
 			v-if="exps"
 			class="app-title"
@@ -36,8 +25,16 @@
 		>
         </fade-loader>
 
-     
-
+            <!-- v-show="exps" -->
+           <paginate
+			:pageCount="pageCount"
+			:clickHandler="paging"
+			:prevText="'Prev'"
+			:nextText="'Next'"
+			:containerClass="'pagination'"
+		>
+		</paginate>
+        
 	</section>
 </template>
 
@@ -52,7 +49,10 @@
         name: "exp-app",
         data(){
             return{
-            //    filterBy:{}
+                filterBy:{
+                    limit: 8 ,
+                     skip: 0
+                }
             }
         },
 		computed: {
@@ -77,19 +77,14 @@
 				});
             },
             paging(num){
-                console.log(num)
-                
+                this.$store.commit({ type: "setExps", exps: null })
+                this.filterBy.skip = (num - 1) * 8;
+                this.setFilter({...this.filterBy})
             }
 		},
 		created() {
             window.scrollTo(0, 0);
-            const filterBy= {}
-            filterBy.limit = 8;
-            filterBy.skip = 8;
-            this.$store.commit({
-                type: "setFilter",
-                filterBy,
-            })
+            this.setFilter({...this.filterBy})
 			this.$store.dispatch({
                 type: "loadExps",
 			});

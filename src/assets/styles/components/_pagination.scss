@@ -1,12 +1,10 @@
 .pagination{
-    margin: 0 auto;
+    margin: 20px auto 30px;
     display: flex;
-    margin-top: 100px;
     border: 1.5px solid  #1e72e0;
     border-radius: 5px;
     li:not(:last-of-type){
         border-right: 1.5px solid  #1e72e0;
-
     }
     li{
         padding: 2px 9px;
@@ -21,5 +19,4 @@
             outline: none;
         }
     }
-    
 }
