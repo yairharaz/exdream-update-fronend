@@ -1,128 +1,92 @@
 <template>
-    <section class="exp-details">
-        <fade-loader
-            class="fade-loader"
-            :loading="loading"
-            :radius="'100px'"
-            :color="'#1e72e0'"
-            :height="'40px'"
-            :width="'5px'"
-        ></fade-loader>
-        <div v-if="isModalOpen" class="screen"></div>
-        <div v-if="exp" class="exp-details-container">
-            <div class="exp-details-header">
-                <div class="exp-title-container">
-                    <h4 class="exp-details-title">{{ exp.title }}</h4>
-                    <h5 class="exp-date">{{ expDate }}</h5>
-                </div>
-                <div class="seller-top">
-                    <div class="name-rate">
-                        <h4>{{ exp.createdBy.fullName }}</h4>
-                        <p class="exp-rate">
-                            <i class="el-icon-star-on"></i>
-                            {{ averageRate }} ({{ exp.reviews.length }})
-                        </p>
-                    </div>
-                    <router-link :to="'/user/' + exp.createdBy._id">
-                        <img class="seller-img" :src="exp.createdBy.imgUrl" />
-                    </router-link>
-                </div>
+<section class="exp-details">
+    <fade-loader class="fade-loader" :loading="loading" :radius="'100px'" :color="'#1e72e0'" :height="'40px'" :width="'5px'"></fade-loader>
+    <div v-if="isModalOpen" class="screen"></div>
+    <div v-if="exp" class="exp-details-container">
+        <div class="exp-details-header">
+            <div class="exp-title-container">
+                <h4 class="exp-details-title">{{ exp.title }}</h4>
+                <h5 class="exp-date">{{ expDate }}</h5>
             </div>
-            <div class="img-container">
-                <img
-                    v-for="(img, idx) in exp.imgUrls"
-                    :key="idx"
-                    :src="img"
-                    alt
-                />
-            </div>
-            <h5 class="exp-details-shortDesc">{{ exp.shortDesc }}</h5>
-            <div class="exp-details-main">
-                <div class="exp-descs-container">
-                    <p v-if="!readMore" class="exp-details-desc">
-                        {{ hideDesc }}
-                    </p>
-                    <p v-else class="exp-details-desc">{{ exp.desc }}</p>
-                    <a
-                        href="#"
-                        v-if="!readMore"
-                        @click.prevent="toggleMoreReading"
-                        class="show-hide-desc-btn"
-                    >
-                        Read More...
-                    </a>
-                    <button
-                        v-else
-                        class="show-hide-desc-btn"
-                        @click.prevent="toggleMoreReading"
-                    >
-                        Hide...
-                    </button>
-                    <button class="edit-exp-btn" @click.prevent="editExp">
-                        Edit Experience
-                    </button>
-                </div>
-                <exp-book @booking="booking" :exp="exp" />
-            </div>
-            <div class="exp-details-review-list">
-                <p class="exp-rate">
-                    <i class="el-icon-star-on"></i>
-                    {{ averageRate }} ({{ exp.reviews.length }}) reviews
-                </p>
-                <button
-                    class="add-review-btn"
-                    @click.prevent="toggleReviewModal"
-                >
-                    Add Review
-                </button>
-                <review-details
-                    class="review-modal"
-                    v-show="isModalOpen"
-                    @closeModal="toggleReviewModal"
-                />
-                <ul v-if="exp.reviews.length > 0" class="review-list">
-                    <exp-review
-                        v-for="review in expReviewsToShow"
-                        :key="review.id"
-                        :review="review"
-                    />
-                </ul>
-                <p v-else>No reviews have been got yet</p>
-                <a
-                    href="#"
-                    @click.prevent="toggleReview"
-                    v-if="isHide"
-                    class="show-hide-review-btn"
-                >
-                    Show more...
-                </a>
-                <button
-                    @click="toggleReview"
-                    v-else
-                    class="show-hide-review-btn"
-                >
-                    Hide
-                </button>
-            </div>
-            <div class="exp-details-guide-container">
-                <div class="guide-details">
-                    <router-link :to="'/user/' + exp.createdBy._id">
-                        <img class="seller-img" :src="exp.createdBy.imgUrl" />
-                    </router-link>
+            <div class="seller-top">
+                <div class="name-rate">
                     <h4>{{ exp.createdBy.fullName }}</h4>
+                    <p class="exp-rate">
+                        <i class="el-icon-star-on"></i>
+                        {{ averageRate }} ({{ exp.reviews.length }})
+                    </p>
                 </div>
-                <h4 class="exp-details-guide-info">{{ exp.createdBy.info }}</h4>
-                <p class="exp-rate">
-                    <i class="el-icon-star-on"></i>
-                    {{ averageRate }} ({{ exp.reviews.length }}) reviews
-                </p>
+                <router-link :to="'/user/' + exp.createdBy._id">
+                    <img class="seller-img" :src="exp.createdBy.imgUrl" />
+                </router-link>
             </div>
         </div>
-    </section>
+        <div class="img-container">
+            <img v-for="(img, idx) in exp.imgUrls" :key="idx" :src="img" alt />
+        </div>
+        <h5 class="exp-details-shortDesc">{{ exp.shortDesc }}</h5>
+        <div class="exp-details-main">
+            <div class="exp-descs-container">
+                <p v-if="!readMore" class="exp-details-desc">
+                    {{ hideDesc }}
+                </p>
+                <p v-else class="exp-details-desc">{{ exp.desc }}</p>
+                <a href="#" v-if="!readMore" @click.prevent="toggleMoreReading" class="show-hide-desc-btn">
+                    Read More...
+                </a>
+                <button v-else class="show-hide-desc-btn" @click.prevent="toggleMoreReading">
+                    Hide...
+                </button>
+                <button class="edit-exp-btn" @click.prevent="editExp">
+                    Edit Experience
+                </button>
+            </div>
+            <exp-book @booking="booking" :exp="exp" />
+        </div>
+        <div class="exp-details-review-list">
+            <p class="exp-rate">
+                <i class="el-icon-star-on"></i>
+                {{ averageRate }} ({{ exp.reviews.length }}) reviews
+            </p>
+
+            <button class="add-review-btn" @click.prevent="toggleReviewModal">
+                Add Review
+            </button>
+
+            <review-details class="review-modal" v-show="isModalOpen" @closeModal="toggleReviewModal" />
+
+            <ul v-if="exp.reviews.length > 0" class="review-list">
+                <exp-review v-for="review in expReviewsToShow" :key="review.id" :review="review" />
+            </ul>
+            <p v-else>No reviews have been got yet</p>
+            <a href="#" @click.prevent="toggleReview" v-if="isHide" class="show-hide-review-btn">
+                Show more...
+            </a>
+            <button @click="toggleReview" v-else class="show-hide-review-btn">
+                Hide
+            </button>
+        </div>
+        <div class="exp-details-guide-container">
+            <div class="guide-details">
+                <router-link :to="'/user/' + exp.createdBy._id">
+                    <img class="seller-img" :src="exp.createdBy.imgUrl" />
+                </router-link>
+                <h4>{{ exp.createdBy.fullName }}</h4>
+            </div>
+            <h4 class="exp-details-guide-info">{{ exp.createdBy.info }}</h4>
+            <p class="exp-rate">
+                <i class="el-icon-star-on"></i>
+                {{ averageRate }} ({{ exp.reviews.length }}) reviews
+            </p>
+        </div>
+    </div>
+</section>
 </template>
- 
+
 <script>
-import { expService } from "../services/exp.service.js";
+import {
+    expService
+} from "../services/exp.service.js";
 import expBook from "../components/exp-book.vue";
 import expReview from "../components/exp-review.vue";
 import reviewDetails from "../components/review-details.vue";
@@ -211,4 +175,3 @@ export default {
     },
 };
 </script>
-
