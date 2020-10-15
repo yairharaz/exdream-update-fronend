@@ -3,13 +3,6 @@
     <app-header />
     <router-view/>
     <footer-app />
-
-     
-     
-
-
-  
-
   </div>
 </template>
 

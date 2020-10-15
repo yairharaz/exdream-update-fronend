@@ -1,5 +1,5 @@
 <template>
-	<section class="exp-app exp-main">
+	<section  class="exp-app exp-main">
 
 		<h2
 			v-if="exps"
@@ -34,7 +34,7 @@
 			:containerClass="'pagination'"
 		>
 		</paginate>
-        
+
 	</section>
 </template>
 

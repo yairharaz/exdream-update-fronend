@@ -1,12 +1,15 @@
 .footer-app {
-    border-top: 1px solid black;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
     .footer-container {
+        border-top: 1px solid black;
         display: flex;
         justify-content: space-between;
         padding: 30px 15px;
-        max-width: 1200px;
-        margin: 0 auto;
-
+        // max-width: 1200px;
+        // margin: 0 auto;
         @include for-wide-XL-layout{
             max-width: 980px;
 
