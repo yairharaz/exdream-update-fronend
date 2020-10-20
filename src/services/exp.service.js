@@ -80,6 +80,7 @@ async function addParticipant(booked, exp, user) {
   exp.participants.push(miniUser);
   try {
     const updatedExp = await update(exp)
+    await userService.informSeller(exp.createdBy._id , miniUser)
     return updatedExp
   } catch (err) {
     return (err)

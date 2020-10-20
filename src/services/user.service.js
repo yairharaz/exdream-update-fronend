@@ -1,3 +1,4 @@
+import { Date } from 'core-js'
 import HttpService from './http.service.js'
 
 export const userService = {
@@ -7,20 +8,24 @@ export const userService = {
     getById,
     remove,
     update,
+    informSeller,
     getGuestUser
 }
 
 
-function getGuestUser(booked = 0) {
-    const user = {
-        _id: makeId(),
-        fullName: 'guest',
-        imgUrl: "https://icon-library.com/images/male-avatar-icon/male-avatar-icon-29.jpg",
-        numOfTickets: booked.numOfTickets,
-        createdAt: Date.now()
-    }
-    return user
-}
+// פונקציה שעוזרת לעדבן את כל המערך של היוזרים.
+
+// getUsers()
+// async function getUsers(){
+//     const users = await HttpService.get(`user`) 
+//     users.forEach( async (user) => {
+//         user.notifications = {
+//             newParticipants: [],
+//             newReviewers:[],
+//         }
+//         await update(user);
+//     });
+// }
 
 
 async function getById(userId) {
@@ -49,6 +54,26 @@ async function logout() {
     sessionStorage.clear();
 }
 
+async function informSeller(sellerId, { fullName, imgUrl }) {
+    const seller = await getById(sellerId);
+    seller.notifications.newParticipants.push({
+        fullName, 
+        imgUrl, 
+        createdAt: Date.now()
+    })
+    await update(seller)
+}
+
+function getGuestUser(booked = 0) {
+    const user = {
+        _id: makeId(),
+        fullName: 'guest',
+        imgUrl: "https://icon-library.com/images/male-avatar-icon/male-avatar-icon-29.jpg",
+        numOfTickets: booked.numOfTickets,
+        createdAt: Date.now()
+    }
+    return user
+}
 
 function _handleLogin(user) {
     sessionStorage.setItem('user', JSON.stringify(user))

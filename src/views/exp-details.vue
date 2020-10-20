@@ -69,17 +69,20 @@
                     <i class="el-icon-star-on"></i>
                     {{ averageRate }} ({{ exp.reviews.length }}) reviews
                 </p>
+
                 <button
                     class="add-review-btn"
                     @click.prevent="toggleReviewModal"
                 >
                     Add Review
                 </button>
+
                 <review-details
                     class="review-modal"
                     v-show="isModalOpen"
                     @closeModal="toggleReviewModal"
                 />
+
                 <ul v-if="exp.reviews.length > 0" class="review-list">
                     <exp-review
                         v-for="review in expReviewsToShow"
@@ -120,10 +123,9 @@
         </div>
     </section>
 </template>
- 
+
 <script>
 import { expService } from "../services/exp.service.js";
-import { userService } from "../services/user.service.js";
 import expBook from "../components/exp-book.vue";
 import expReview from "../components/exp-review.vue";
 import reviewDetails from "../components/review-details.vue";
@@ -168,8 +170,6 @@ export default {
     methods: {
         async booking(booked) {
             const user = this.$store.getters.loggedinUser;
-            const seller = await userService.getById(this.exp.createdBy._id);
-            console.log('seller', seller);
             await this.$store.dispatch({
                 type: "booking",
                 booked,
@@ -214,4 +214,3 @@ export default {
     },
 };
 </script>
-
