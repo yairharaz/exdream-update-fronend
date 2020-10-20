@@ -120,10 +120,10 @@ export default {
         },
     },
     created() {
-        const loggedinuser = this.$store.getters.loggedinUser;
-        if (!loggedinuser) return;
+        const loggedinUser = this.$store.getters.loggedinUser;
+        if (!loggedinUser) return;
         socket.setup();
-        socket.on(loggedinuser._id, (buyer) => {
+        socket.on(loggedinUser._id, (buyer) => {
             this.buyer = buyer;
             this.numOfNoticications++;
         });

@@ -128,7 +128,7 @@ export default {
             await this.$store.dispatch({
                 type: "loadExps",
             });
-            console.log(this.$store.getters.exps);
+            // console.log(this.$store.getters.exps);
             return this.$store.getters.exps;
         },
     },

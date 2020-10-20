@@ -65,8 +65,6 @@ export default {
                     imgUrl,
                 } = this.$store.getters.loggedinUser;
                 this.review.by = { _id, fullName, imgUrl };
-                // this.review.by = this.$store.getters.loggedinUser;
-                console.log(this.review);
             } else {
                 const { _id, fullName, imgUrl } = userService.getGuestUser();
                 this.review.by = { _id, fullName, imgUrl };

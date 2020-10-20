@@ -1,10 +1,6 @@
 import { expService } from '../services/exp.service.js'
 import { orderService } from '../services/order.service.js'
 
-async function getNumOfAllExpsData() {
-  const numOfAllExps = await HttpService.get(`exp/num`)
-  return numOfAllExps
-}
 
 export const expStore = {
   state: {
