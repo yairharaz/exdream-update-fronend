@@ -36,9 +36,9 @@ export default {
             this.$router.push('/signup')
         }
     },
-    mounted() {
-        this.$refs.input.focus()
-    },
+    // mounted() {
+    //     this.$refs.input.focus()
+    // },
 }
 </script>
 

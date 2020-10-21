@@ -19,6 +19,7 @@ export const userStore = {
     },
     mutations: {
         setUser(state, { user }) {
+            sessionStorage.user = JSON.stringify(user)
             state.loggedinUser = user;
         },
         removeUser(state, { userId }) {

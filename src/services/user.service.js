@@ -19,10 +19,7 @@ export const userService = {
 // async function getUsers(){
 //     const users = await HttpService.get(`user`) 
 //     users.forEach( async (user) => {
-//         user.notifications = {
-//             newParticipants: [],
-//             newReviewers:[],
-//         }
+//         user.notifications = []
 //         await update(user);
 //     });
 // }
@@ -56,8 +53,8 @@ async function logout() {
 
 async function informSeller(sellerId, { fullName, imgUrl }) {
     const seller = await getById(sellerId);
-    seller.notifications.newParticipants.push({
-        fullName, 
+    seller.notifications.push({
+        desc:  fullName + ' ordered from you',
         imgUrl, 
         createdAt: Date.now()
     })
