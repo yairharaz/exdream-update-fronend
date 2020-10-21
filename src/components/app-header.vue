@@ -1,13 +1,8 @@
 <template>
 <section class="app-header">
-    <div v-if="msgToSeller" class="msg-to-seller" :style="{top: msgToSellerY + 'px', left: (msgToSellerX -285)  + 'px' }">
-        <div class="user-container">
-            <img class="user-img" :src="buyer.imgUrl" />
-            <p class="user-name">{{buyer.fullName}} ordered from you</p>
-            <!-- <p class="user-name">Rani Karavani just ordered from you</p> -->
-        </div>
-        <button @click="close">x</button>
-    </div>
+
+    <notifications v-if="isNotificationsListOpen" :notifications="notifications" @close="closeNotification" :style="{top: '53px', left: notificationsX  + 'px' }" />
+
     <router-link to="/">
         <span :class="isOnHome" @click="goToHome">
             <img src="img/icons/logo.png" alt="" />
@@ -15,49 +10,49 @@
     </router-link>
     <div v-if="isMenuOpen" @click="toggleMenu" class="screen"></div>
 
-    <div class="mobil-container">
-        <button @click="reset" class="bell-btn mobile" v-if="loggedinUser">
+    <!-- MOBILE -->
+    <div class="mobile-container">
+        <button @click="showNotificationsList" class="bell-btn mobile" v-if="loggedinUser">
             <i class="fas fa-bell"></i>
-            <div :class="{visible: numOfNoticications}" class="msg">{{numOfNoticications}}</div>
+            <div :class="{visible: notifications.length}" class="msg">{{notifications.length}}</div>
         </button>
         <button @click="toggleMenu" class="hamburger">
             <i class="fas fa-bars"></i>
         </button>
     </div>
+
+    <!-- DESKTOP -->
     <div class="router-header" :class="{openMenu: isMenuOpen}">
-        <button @click="reset" class="bell-btn" v-if="loggedinUser">
+        <button @click="showNotificationsList" class="bell-btn" v-if="loggedinUser">
             <i class="fas fa-bell"></i>
-            <div :class="{visible: numOfNoticications}" class="msg">{{numOfNoticications}}</div>
+            <div :class="{visible: notifications.length}" class="msg">{{notifications.length}}</div>
         </button>
         <button v-if="loggedinUser" :class="isOnProfile" @click="goToProfile">My Profile</button>
         <button :class="isOnExperiences" @click="goToExperiences">Experiences</button>
         <router-link v-if="!loggedinUser" to="/login">
             <span @click="goToLogin" :class="isOnLogin">Login</span>
         </router-link>
-        <!-- <router-link to="/login">logout</router-link> -->
         <div v-else class="log-user">
             <button class="logout-btn" @click="logout">logout</button>
         </div>
     </div>
-    <!-- <notifications /> -->
+
 </section>
 </template>
 
 <script>
 import socket from "../services/socket.service.js";
-// import notifications from 'vue-notification'
+import notifications from "./notifications.vue"
 
 export default {
     name: "app-header",
     data() {
         return {
             activeLink: "home",
-            msgToSeller: false,
-            buyer: null,
             isMenuOpen: false,
-            numOfNoticications: 0,
-            msgToSellerX: 0,
-            msgToSellerY: 0,
+            notificationsX: 0,
+            notificationsY: 0,
+            isNotificationsListOpen: false
         };
     },
     computed: {
@@ -84,6 +79,9 @@ export default {
                 active: this.activeLink === "experiences"
             };
         },
+        notifications() {
+            return this.loggedinUser.notifications
+        }
     },
     methods: {
         async logout() {
@@ -114,47 +112,46 @@ export default {
             this.activeLink = "login";
             this.isMenuOpen = false;
         },
-        close() {
-            this.msgToSeller = false;
+        closeNotification(idx) {
+            const loggedinUser = JSON.parse(JSON.stringify(this.loggedinUser));
+            loggedinUser.notifications.splice(idx, 1);
+            this.$store.dispatch({
+                type: "updateUser",
+                user: loggedinUser
+            })
+
         },
         toggleMenu() {
             this.isMenuOpen = !this.isMenuOpen;
         },
-        reset(ev) {
-            this.msgToSellerX = ev.pageX;
-            this.msgToSellerY = ev.pageY;
-            this.numOfNoticications = 0;
-            this.msgToSeller = true;
+        showNotificationsList(ev) {
+            this.notificationsX = ev.pageX;
+            this.notificationsY = ev.pageY;
+            console.log('Y : ', this.notificationsY)
+            this.isNotificationsListOpen = !this.isNotificationsListOpen
         },
-        notifictions() {
-            if (!this.loggedinUser) return;
-            const {
-                newParticipants,
-                newReviewers
-            } = this.loggedinUser.notifications;
-            this.numOfNoticications = newParticipants.length + newReviewers.length;
-        }
     },
-    mounted() {
-        this.$root.$on('update loggedin user', () => {
-            this.notifictions();
-        });
-    },
+    // mounted() {
+    //     this.$root.$on('update loggedin user', () => {
+    //        
+    //     });
+    // },
     created() {
         if (!this.loggedinUser) return;
-        this.notifictions();
         socket.setup();
         socket.on(this.loggedinUser._id, (buyer) => {
             const user = {
                 ...this.loggedinUser
             }
-            user.notifications.newParticipants.push(buyer)
+            user.notifications.push(buyer)
             this.$store.commit({
                 type: "setUser",
                 user,
             })
-            this.notifictions();
         });
     },
+    components: {
+        notifications
+    }
 };
 </script>
