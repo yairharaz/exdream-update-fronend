@@ -20,40 +20,28 @@
             </button>
         </div>
     </div>
-   
-        <div
-            v-if="bestDeals && popSki && inAsia"
-            ref="cardsContainer"
-            class="cards-container"
-        >
-            <div class="type-container">
-                <h2>Best Deals</h2>
-                <button @click="goToExpApp({ sortBy: 'currPrice' })">
-                    See All
-                </button>
-            </div>
-            <exp-list :exps="bestDealsToShow" />
-            <div class="type-container">
-                <h2>Popular Ski Experience</h2>
-                <button @click="goToExpApp({ type: 'Ski' })">See All</button>
-            </div>
-            <exp-list :exps="popSkiToShow" />
-            <div class="type-container">
-                <h2>Popular In Asia</h2>
-                <button @click="goToExpApp({ tags: ['Asia'] })">See All</button>
-            </div>
-            <exp-list :exps="inAsiaToShow" />
+
+    <div v-if="bestDeals && popSki && inAsia" ref="cardsContainer" class="cards-container">
+        <div class="type-container">
+            <h2>Best Deals</h2>
+            <button @click="goToExpApp({ sortBy: 'currPrice' })">
+                See All
+            </button>
         </div>
-        <fade-loader
-            v-else
-            class="fade-loader"
-            :loading="true"
-            :radius="'100px'"
-            :color="'#1e72e0'"
-            :height="'40px'"
-            :width="'5px'"
-        ></fade-loader>
-    </section>
+        <exp-list :exps="bestDealsToShow" />
+        <div class="type-container">
+            <h2>Popular Ski Experience</h2>
+            <button @click="goToExpApp({ type: 'Ski' })">See All</button>
+        </div>
+        <exp-list :exps="popSkiToShow" />
+        <div class="type-container">
+            <h2>Popular In Asia</h2>
+            <button @click="goToExpApp({ tags: ['Asia'] })">See All</button>
+        </div>
+        <exp-list :exps="inAsiaToShow" />
+    </div>
+    <fade-loader v-else class="fade-loader" :loading="true" :radius="'100px'" :color="'#1e72e0'" :height="'40px'" :width="'5px'"></fade-loader>
+</section>
 </template>
 
 <script>
@@ -128,7 +116,6 @@ export default {
             await this.$store.dispatch({
                 type: "loadExps",
             });
-            // console.log(this.$store.getters.exps);
             return this.$store.getters.exps;
         },
     },
@@ -150,7 +137,10 @@ export default {
     },
     destroyed() {
         window.removeEventListener("resize", this.getNumOfCard, false);
-        this.$store.commit({ type: "setExps", exps: null });
+        this.$store.commit({
+            type: "setExps",
+            exps: null
+        });
     },
     components: {
         expList,
