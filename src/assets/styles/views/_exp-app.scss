@@ -11,10 +11,12 @@
         font-size: 0px;
     }
     .app-title {
-        margin-top: 85px;
+        text-align: center;
+        margin-top: 95px;
         margin-bottom: 20px;
         font-size: 40px;
         margin-inline-start: 7px;
+        text-transform: capitalize;
     }
     @include for-wide-XL-layout{
         max-width: 980px;
