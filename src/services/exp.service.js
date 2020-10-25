@@ -12,7 +12,8 @@ export const expService = {
   addParticipant,
   getEmptyExp,
   saveExp,
-  getNumOfAllExps
+  getNumOfAllExps,
+  addReview
 }
 
 async function getExps({ type = 'all-type', location = 'all-location', tags = [], sortBy = 'newest', userId = 'all', limit = 0, skip = 0 }) {
@@ -66,26 +67,37 @@ function getEmptyExp() {
   return emptyExp
 }
 
+
+
 async function addParticipant(booked, exp, user) {
-  let miniUser;
-  if (user) {
-    miniUser = {
-      _id: user._id,
-      fullName: user.fullName,
-      imgUrl: user.imgUrl,
-      numOfTickets: booked.numOfTickets,
-      createdAt: Date.now()
-    }
-  } else miniUser = userService.getGuestUser(booked)
+  let miniUser = (user)? userService.getMiniUser(user) : userService.getGuestUser();
+  miniUser.numOfTickets =  booked.numOfTickets,
   exp.participants.push(miniUser);
   try {
-    const updatedExp = await update(exp)
-    await userService.informSeller(exp.createdBy._id , miniUser)
+    const updatedExp = await update(exp);
+    await userService.informSeller(exp.createdBy._id , miniUser ,'order');
     return updatedExp
   } catch (err) {
-    return (err)
+    console.log(err)
+    throw (err)
   }
 }
+
+async function addReview(exp, review ,user){
+  let miniUser = (user)? userService.getMiniUser(user) : userService.getGuestUser();
+  review.by = miniUser ;
+  exp.reviews.unshift(review);
+  try {
+    const updatedExp = await update(exp);
+    await userService.informSeller(exp.createdBy._id , miniUser ,'review');
+    console.log(updatedExp) 
+  } catch (err) {
+    console.log(err)
+    throw (err)
+  }
+
+}
+
 
 function saveExp(exp) {
   return exp._id ? update(exp) : add(exp);
