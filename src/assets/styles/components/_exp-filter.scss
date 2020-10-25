@@ -1,6 +1,7 @@
 .exp-filter {
-    margin-bottom: 18px;
+    margin-bottom: 25px;
     margin-inline-start: 7px;
+    text-align: center;
     .screen {
         top: 0;
         left: 0;
@@ -17,8 +18,7 @@
         z-index: 5;
         padding: 8px 22px;
         background-color: #ffffff;
-        margin: 0;
-        margin-inline-end: 20px;
+        margin: 0 10px;
         border-radius: 99px;
         border: 0.5px solid lightgray;
         line-height: 18px;

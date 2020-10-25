@@ -1,8 +1,8 @@
 <template>
 <section class="exp-app exp-main">
 
-    <h2 v-if="exps" class="app-title">Choose an Experience</h2>
-    <exp-filter v-if="exps" @setFilter="setFilter" />
+    <h2 class="app-title">choose an experience</h2>
+    <exp-filter @setFilter="setFilter" />
     <exp-list v-if="exps" :exps="exps" :loggedinUser="loggedinUser" />
     <fade-loader v-else class="fade-loader" :loading="true" :radius="'100px'" :color="'#1e72e0'" :height="'40px'" :width="'5px'">
     </fade-loader>
