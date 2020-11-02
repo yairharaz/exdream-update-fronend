@@ -7,6 +7,9 @@ import ElementUI from 'element-ui';
 import locale from 'element-ui/lib/locale/lang/en'
 // import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
+// import VueCarousel from 'vue-carousel';
+// Vue.use(VueCarousel);
+
 
 
 //Chart

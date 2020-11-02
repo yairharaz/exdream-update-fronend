@@ -2,6 +2,16 @@
 <section class="exp-details">
     <fade-loader class="fade-loader" :loading="loading" :radius="'100px'" :color="'#1e72e0'" :height="'40px'" :width="'5px'"></fade-loader>
     <div v-if="isModalOpen" class="screen"></div>
+
+    <div class="img-carousel" v-if="isCarouselOpen">
+        <carousel :imgIdx="imgIdx">
+            <carousel-slide class="carousel-slider" v-for="(slide , index) in exp.imgUrls" :key="slide" :index="index">
+                <img :src="slide" :alt="slide">
+            </carousel-slide>
+        </carousel>
+        <button class="btn-close" @click="closeImgCarousel"><i class="fas fa-times"></i></button>
+    </div>
+
     <div v-if="exp" class="exp-details-container">
         <div class="exp-details-header">
             <div class="exp-title-container">
@@ -22,7 +32,7 @@
             </div>
         </div>
         <div class="img-container">
-            <img v-for="(img, idx) in exp.imgUrls" :key="idx" :src="img" alt />
+            <img v-for="(img, idx) in exp.imgUrls" :key="idx" :src="img" @click="openImags(idx)" />
         </div>
         <h5 class="exp-details-shortDesc">{{ exp.shortDesc }}</h5>
         <div class="exp-details-main">
@@ -94,6 +104,9 @@ import fadeLoader from "vue-spinner/src/FadeLoader.vue";
 import socket from "../services/socket.service.js";
 import moment from "moment";
 
+import carousel from '../components/carousel.vue';
+import carouselSlide from '../components/carousel-slide.vue'
+
 export default {
     name: "exp-details",
     data() {
@@ -102,7 +115,8 @@ export default {
             readMore: false,
             isHide: true,
             isModalOpen: false,
-            // loading: (this.exp)? false: true,
+            imgIdx: null,
+            isCarouselOpen: false
         };
     },
     computed: {
@@ -157,6 +171,13 @@ export default {
         toggleReviewModal() {
             this.isModalOpen = !this.isModalOpen;
         },
+        openImags(idx) {
+            this.imgIdx = idx;
+            this.isCarouselOpen = true
+        },
+        closeImgCarousel() {
+            this.isCarouselOpen = false
+        }
     },
     async created() {
         window.scrollTo(0, 0);
@@ -172,6 +193,12 @@ export default {
         expReview,
         reviewDetails,
         fadeLoader,
+        carousel,
+        carouselSlide
     },
 };
 </script>
+
+<style>
+
+</style>

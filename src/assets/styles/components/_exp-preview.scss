@@ -24,6 +24,7 @@ li.exp-preview {
         border-top-right-radius: 0.5rem;
         cursor: pointer;
         overflow: hidden;
+        position: relative;
         img {
             @include img-cover-center-grid;
             transition: 0.8s;

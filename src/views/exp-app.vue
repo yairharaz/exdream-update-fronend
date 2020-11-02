@@ -1,6 +1,8 @@
 <template>
 <section class="exp-app exp-main">
 
+    <!-- <Carousel :data="data"></Carousel> -->
+
     <h2 class="app-title">choose an experience</h2>
     <exp-filter @setFilter="setFilter" />
     <exp-list v-if="exps" :exps="exps" :loggedinUser="loggedinUser" />
@@ -20,6 +22,10 @@ import expFilter from "../components/exp-filter.vue";
 import fadeLoader from "vue-spinner/src/FadeLoader.vue";
 import paginate from 'vuejs-paginate';
 
+import {
+    Carousel
+} from 'vue-carousel';
+
 export default {
     name: "exp-app",
     data() {
@@ -27,7 +33,14 @@ export default {
             filterBy: {
                 limit: 8,
                 skip: 0
-            }
+            },
+
+            // data: [
+            //     '<div class="example-slide">Slide 1</div>',
+            //     '<div class="example-slide">Slide 2</div>',
+            //     '<div class="example-slide">Slide 3</div>'
+            // ],
+
         }
     },
     computed: {
@@ -78,8 +91,8 @@ export default {
         expList,
         expFilter,
         fadeLoader,
-
-        paginate
+        paginate,
+        // Carousel
     },
 };
 
@@ -113,3 +126,15 @@ export default {
 
 // }, 2500)
 </script>
+
+<style>
+.example-slide {
+    align-items: center;
+    background-color: #666;
+    color: #999;
+    display: flex;
+    font-size: 1.5rem;
+    justify-content: center;
+    min-height: 10rem;
+}
+</style>
