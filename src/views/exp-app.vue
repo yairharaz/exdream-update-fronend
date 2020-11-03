@@ -22,9 +22,7 @@ import expFilter from "../components/exp-filter.vue";
 import fadeLoader from "vue-spinner/src/FadeLoader.vue";
 import paginate from 'vuejs-paginate';
 
-import {
-    Carousel
-} from 'vue-carousel';
+import {Carousel} from 'vue-carousel';
 
 export default {
     name: "exp-app",
