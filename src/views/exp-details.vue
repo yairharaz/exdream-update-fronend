@@ -1,21 +1,24 @@
-<template>
-    <section class="exp-details">
-        <fade-loader
-            class="fade-loader"
-            :loading="loading"
-            :radius="'100px'"
-            :color="'#1e72e0'"
-            :height="'40px'"
-            :width="'5px'"
-        ></fade-loader>
-        <div v-if="isModalOpen" class="screen"></div>
-        <div v-if="exp" class="exp-details-container">
-            <div class="exp-details-header">
-                <div class="exp-title-container">
-                    <h4 class="exp-details-title">{{ exp.title }}</h4>
-                    <h5 class="exp-date">{{ expDate }}</h5>
-                </div>
-                <div class="seller-top">
+<template>      
+<section class="exp-details">
+    <fade-loader class="fade-loader" :loading="loading" :radius="'100px'" :color="'#1e72e0'" :height="'40px'" :width="'5px'"></fade-loader>
+    <div v-if="isModalOpen" class="screen"></div>
+
+    <div class="img-carousel" v-if="isCarouselOpen">
+        <carousel :imgIdx="imgIdx">
+            <carousel-slide class="carousel-slider" v-for="(slide , index) in exp.imgUrls" :key="slide" :index="index">
+                <img :src="slide" :alt="slide">
+            </carousel-slide>
+        </carousel>
+        <button class="btn-close" @click="closeImgCarousel"><i class="fas fa-times"></i></button>
+    </div>
+
+    <div v-if="exp" class="exp-details-container">
+        <div class="exp-details-header">
+            <div class="exp-title-container">
+                <h4 class="exp-details-title">{{ exp.title }}</h4>
+                <h5 class="exp-date">{{ expDate }}</h5>
+            </div>
+            <div class="seller-top">
                     <div class="name-rate">
                         <h4>{{ exp.createdBy.fullName }}</h4>
                         <p class="exp-rate">
@@ -26,84 +29,50 @@
                     <router-link :to="'/user/' + exp.createdBy._id">
                         <img class="seller-img" :src="exp.createdBy.imgUrl" />
                     </router-link>
-                </div>
             </div>
-            <div class="img-container">
-                <img
-                    v-for="(img, idx) in exp.imgUrls"
-                    :key="idx"
-                    :src="img"
-                    alt
-                />
-            </div>
-            <h5 class="exp-details-shortDesc">{{ exp.shortDesc }}</h5>
-            <div class="exp-details-main">
-                <div class="exp-descs-container">
-                    <p v-if="!readMore" class="exp-details-desc">
+        </div>
+        <div class="img-container">
+            <img v-for="(img, idx) in exp.imgUrls" :key="idx" :src="img" @click="openImgs(idx)" />
+        </div>
+        <h5 class="exp-details-shortDesc">{{ exp.shortDesc }}</h5>
+        <div class="exp-details-main">
+            <div class="exp-descs-container">
+                <p v-if="!readMore" class="exp-details-desc">
                         {{ hideDesc }}
-                    </p>
-                    <p v-else class="exp-details-desc">{{ exp.desc }}</p>
-                    <a
-                        href="#"
-                        v-if="!readMore"
-                        @click.prevent="toggleMoreReading"
-                        class="show-hide-desc-btn"
-                    >
+                </p>
+                <p v-else class="exp-details-desc">{{ exp.desc }}</p>
+                <a href="#" v-if="!readMore" @click.prevent="toggleMoreReading" class="show-hide-desc-btn">
                         Read More...
-                    </a>
-                    <button
-                        v-else
-                        class="show-hide-desc-btn"
-                        @click.prevent="toggleMoreReading"
-                    >
-                        Hide...
-                    </button>
-                    <button class="edit-exp-btn" @click.prevent="editExp">
+                </a>
+                <button v-else class="show-hide-desc-btn" @click.prevent="toggleMoreReading" >
+                        Hide... 
+                </button>
+                <button class="edit-exp-btn" @click.prevent="editExp">
                         Edit Experience
-                    </button>
-                </div>
-                <exp-book @booking="booking" :exp="exp" />
+                </button>
             </div>
+                <exp-book @booking="booking" :exp="exp" />
+        </div>
             <div class="exp-details-review-list">
                 <p class="exp-rate">
                     <i class="el-icon-star-on"></i>
-                    {{ averageRate }} ({{ exp.reviews.length }}) reviews
+                    {{ averageRate }} ({{ exp.reviews.length }}) reviews 
                 </p>
 
-                <button
-                    class="add-review-btn"
-                    @click.prevent="toggleReviewModal"
-                >
+                <button class="add-review-btn" @click.prevent="toggleReviewModal">
                     Add Review
                 </button>
 
-                <review-details
-                    class="review-modal"
-                    v-show="isModalOpen"
-                    @closeModal="toggleReviewModal"
-                />
+                <review-details class="review-modal" v-show="isModalOpen" @closeModal="toggleReviewModal"/>
 
                 <ul v-if="exp.reviews.length > 0" class="review-list">
-                    <exp-review
-                        v-for="review in expReviewsToShow"
-                        :key="review.id"
-                        :review="review"
-                    />
+                    <exp-review v-for="review in expReviewsToShow" :key="review.id" :review="review"/>
                 </ul>
                 <p v-else>No reviews have been got yet</p>
-                <a
-                    href="#"
-                    @click.prevent="toggleReview"
-                    v-if="isHide"
-                    class="show-hide-review-btn"
-                >
+                <a href="#" @click.prevent="toggleReview" v-if="isHide" class="show-hide-review-btn">
                     Show more...
                 </a>
-                <button
-                    @click="toggleReview"
-                    v-else
-                    class="show-hide-review-btn"
-                >
+                <button @click="toggleReview" v-else class="show-hide-review-btn">
                     Hide
                 </button>
             </div>
@@ -119,8 +88,8 @@
                     <i class="el-icon-star-on"></i>
                     {{ averageRate }} ({{ exp.reviews.length }}) reviews
                 </p>
-            </div>
         </div>
+    </div>
     </section>
 </template>
 
@@ -133,6 +102,9 @@ import fadeLoader from "vue-spinner/src/FadeLoader.vue";
 import socket from "../services/socket.service.js";
 import moment from "moment";
 
+import carousel from '../components/carousel.vue';
+import carouselSlide from '../components/carousel-slide.vue'
+
 export default {
     name: "exp-details",
     data() {
@@ -141,7 +113,8 @@ export default {
             readMore: false,
             isHide: true,
             isModalOpen: false,
-            // loading: (this.exp)? false: true,
+            imgIdx: 0,
+            isCarouselOpen: false
         };
     },
     computed: {
@@ -196,6 +169,13 @@ export default {
         toggleReviewModal() {
             this.isModalOpen = !this.isModalOpen;
         },
+        openImgs(idx) {
+            this.imgIdx = idx;
+            this.isCarouselOpen = true
+        },
+        closeImgCarousel() {
+            this.isCarouselOpen = false
+        }
     },
     async created() {
         window.scrollTo(0, 0);
@@ -211,6 +191,8 @@ export default {
         expReview,
         reviewDetails,
         fadeLoader,
+        carousel,
+        carouselSlide
     },
 };
 </script>

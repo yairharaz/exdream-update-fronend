@@ -1,10 +1,12 @@
 <template>
 <section class="home-page">
+
     <div class="hero-img">
         <div class="welcome" v-if="loggedinUser">
             <h4 class="welcome-txt">Welcome</h4>
             <h4 class="welcome-txt">{{ loggedinUser.fullName }}</h4>
         </div>
+
         <div class="app-title">
             <h1 class="ex-dream">ExDream</h1>
             <h2>Outdoor experiences around the world</h2>
@@ -53,6 +55,18 @@ export default {
     name: "Home-page",
     data() {
         return {
+            imgUrls: [
+                "https://images.unsplash.com/photo-1493225255756-d9584f8606e9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=900&q=60",
+                "https://images.unsplash.com/photo-1486890598084-3673ba1808c1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+                "https://images.unsplash.com/photo-1537519646099-335112f03225?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+                "https://images.unsplash.com/photo-1529592322238-d80a7b20ae6c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+                "https://images.unsplash.com/photo-1524017718360-1c269e42276b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+            ],
+            data: [
+                '<div class="example-slide">Slide 1</div>',
+                '<div class="example-slide">Slide 2</div>',
+                '<div class="example-slide">Slide 3</div>',
+            ],
             expTypes: [
                 "Ski",
                 "Skydiving",
