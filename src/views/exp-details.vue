@@ -115,7 +115,7 @@ export default {
             readMore: false,
             isHide: true,
             isModalOpen: false,
-            imgIdx: null,
+            imgIdx: 0,
             isCarouselOpen: false
         };
     },

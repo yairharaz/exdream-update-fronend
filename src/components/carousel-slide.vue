@@ -14,7 +14,6 @@ export default {
             return this.index === this.$parent.index;
         },
         dir() {
-            console.log(this.$parent.slideDirection)
             return this.$parent.slideDirection;
         },
     }
