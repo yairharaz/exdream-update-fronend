@@ -1,6 +1,5 @@
 import HttpService from './http.service.js'
 import { userService } from './user.service.js'
-// import { match } from 'core-js/fn/symbol'
 
 
 export const expService = {
