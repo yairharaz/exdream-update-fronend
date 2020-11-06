@@ -1,10 +1,6 @@
 <template>
 <section class="home-page">
 
-    <!-- <slider /> -->
-
-    <carousel :imgUrls="imgUrls"></carousel>
-
     <div class="hero-img">
         <div class="welcome" v-if="loggedinUser">
             <h4 class="welcome-txt">Welcome</h4>
@@ -54,15 +50,6 @@
 import expList from "../components/exp-list.vue";
 import socket from "../services/socket.service.js";
 import fadeLoader from 'vue-spinner/src/FadeLoader.vue';
-
-import carousel from '../components/carousel.vue'
-
-// import {
-//     carousel,
-//     Slide
-// } from 'vue-carousel';
-
-// import slider from './slider.vue';
 
 export default {
     name: "Home-page",
@@ -171,12 +158,7 @@ export default {
     },
     components: {
         expList,
-        fadeLoader,
-        carousel
+        fadeLoader
     },
 };
 </script>
-
-<style>
-
-</style>

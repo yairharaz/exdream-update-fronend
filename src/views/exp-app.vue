@@ -1,8 +1,6 @@
 <template>
 <section class="exp-app exp-main">
 
-    <!-- <Carousel :data="data"></Carousel> -->
-
     <h2 class="app-title">choose an experience</h2>
     <exp-filter @setFilter="setFilter" />
     <exp-list v-if="exps" :exps="exps" :loggedinUser="loggedinUser" />
@@ -18,11 +16,8 @@
 <script>
 import expList from "../components/exp-list.vue";
 import expFilter from "../components/exp-filter.vue";
-
 import fadeLoader from "vue-spinner/src/FadeLoader.vue";
-import paginate from 'vuejs-paginate';
-
-import {Carousel} from 'vue-carousel';
+import paginate from "vuejs-paginate";
 
 export default {
     name: "exp-app",
@@ -32,13 +27,6 @@ export default {
                 limit: 8,
                 skip: 0
             },
-
-            // data: [
-            //     '<div class="example-slide">Slide 1</div>',
-            //     '<div class="example-slide">Slide 2</div>',
-            //     '<div class="example-slide">Slide 3</div>'
-            // ],
-
         }
     },
     computed: {
@@ -49,14 +37,14 @@ export default {
             return this.$store.getters.loggedinUser;
         },
         pageCount() {
-            return Math.ceil(this.$store.getters.numOfAllExps / 8)
-        }
+            return Math.ceil(this.$store.getters.numOfAllExps / 8);
+        },
     },
     methods: {
         setFilter(filterBy) {
             this.$store.commit({
                 type: "setFilter",
-                filterBy
+                filterBy,
             });
             this.$store.dispatch({
                 type: "loadExps",
@@ -65,32 +53,31 @@ export default {
         paging(num) {
             this.$store.commit({
                 type: "setExps",
-                exps: null
-            })
+                exps: null,
+            });
             this.filterBy.skip = (num - 1) * 8;
             this.setFilter({
-                ...this.filterBy
-            })
-        }
+                ...this.filterBy,
+            });
+        },
     },
     created() {
         window.scrollTo(0, 0);
         this.setFilter({
-            ...this.filterBy
-        })
+            ...this.filterBy,
+        });
         this.$store.dispatch({
             type: "loadExps",
         });
         this.$store.dispatch({
-            type: "loadNumOfAllExps"
+            type: "loadNumOfAllExps",
         });
     },
     components: {
         expList,
         expFilter,
         fadeLoader,
-        paginate,
-        // Carousel
+        paginate
     },
 };
 
@@ -124,15 +111,3 @@ export default {
 
 // }, 2500)
 </script>
-
-<style>
-.example-slide {
-    align-items: center;
-    background-color: #666;
-    color: #999;
-    display: flex;
-    font-size: 1.5rem;
-    justify-content: center;
-    min-height: 10rem;
-}
-</style>

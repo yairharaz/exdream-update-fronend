@@ -47,9 +47,7 @@
                 <button v-else class="show-hide-desc-btn" @click.prevent="toggleMoreReading">
                     Hide...
                 </button>
-                <button class="edit-exp-btn" @click.prevent="editExp">
-                    Edit Experience
-                </button>
+
             </div>
             <exp-book @booking="booking" :exp="exp" />
         </div>
@@ -61,6 +59,7 @@
 
             <button class="add-review-btn" @click.prevent="toggleReviewModal">
                 Add Review
+
             </button>
 
             <review-details class="review-modal" v-show="isModalOpen" @closeModal="toggleReviewModal" />
@@ -70,24 +69,29 @@
             </ul>
             <p v-else>No reviews have been got yet</p>
             <a href="#" @click.prevent="toggleReview" v-if="isHide" class="show-hide-review-btn">
-                Show more...
+                Show More...
             </a>
             <button @click="toggleReview" v-else class="show-hide-review-btn">
                 Hide
             </button>
         </div>
         <div class="exp-details-guide-container">
-            <div class="guide-details">
-                <router-link :to="'/user/' + exp.createdBy._id">
-                    <img class="seller-img" :src="exp.createdBy.imgUrl" />
-                </router-link>
-                <h4>{{ exp.createdBy.fullName }}</h4>
+            <div>
+                <div class="guide-details">
+                    <router-link :to="'/user/' + exp.createdBy._id">
+                        <img class="seller-img" :src="exp.createdBy.imgUrl" />
+                    </router-link>
+                    <h4>{{ exp.createdBy.fullName }}</h4>
+                </div>
+                <h4 class="exp-details-guide-info">{{ exp.createdBy.info }}</h4>
+                <p class="exp-rate">
+                    <i class="el-icon-star-on"></i>
+                    {{ averageRate }} ({{ exp.reviews.length }}) reviews
+                </p>
             </div>
-            <h4 class="exp-details-guide-info">{{ exp.createdBy.info }}</h4>
-            <p class="exp-rate">
-                <i class="el-icon-star-on"></i>
-                {{ averageRate }} ({{ exp.reviews.length }}) reviews
-            </p>
+            <button title="Edit your experience" class="edit-exp-btn" @click.prevent="editExp">
+                <i class="far fa-edit"></i>
+            </button>
         </div>
     </div>
 </section>
@@ -116,7 +120,8 @@ export default {
             isHide: true,
             isModalOpen: false,
             imgIdx: 0,
-            isCarouselOpen: false
+            isCarouselOpen: false,
+            mySvg: require('../../public/img/icons/bubble-speech.svg')
         };
     },
     computed: {
@@ -195,6 +200,7 @@ export default {
         fadeLoader,
         carousel,
         carouselSlide
+
     },
 };
 </script>

@@ -23,8 +23,8 @@
         <h4 class="exp-type">{{exp.location}}</h4>
         <h4 class="preview-left">{{left}}/{{exp.capacity}} left</h4>
     </div>
-    <p class="exp-preview-desc">{{exp.shortDesc}}</p>
 
+    <p class="exp-preview-desc">{{exp.shortDesc}}</p>
     <div class="exp-preview-price-stars-rate">
         <p class="exp-date">{{expDate}}</p>
         <p class="exp-price">${{exp.currPrice}}</p>
@@ -60,9 +60,6 @@ export default {
             return this.exp.reviews.length;
         },
         expDate() {
-            // if (this.exp.date < Date.now() + 60 * 60 * 1000 * 24 * 3 ){
-            //     this.exp.date = Date.now() +( 60 * 60 * 1000 * 24 * (Math.floor(Math.random() * (60)) + 1))
-            // }
             return moment(this.exp.date).format('DD/MM/YY')
         }
     },
@@ -80,9 +77,6 @@ export default {
         edit() {
             this.$router.push("/exp/edit/" + this.exp._id);
         }
-    },
-    mounted() {
-
     },
     components: {
         carousel,

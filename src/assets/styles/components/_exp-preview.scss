@@ -5,6 +5,58 @@ li.exp-preview {
     border-radius: 8px;
     margin-inline-start: 0.65%;
     margin-inline-end: 0.65%;
+    .fade-enter-active {
+        overflow: hidden;
+        visibility: visible;
+        position: relative;
+        width: 100%;
+        height: 100%;
+        opacity: 1;
+        animation: leftInAnimation 0.4s linear;
+    }
+    .fade-leave-to-active {
+        animation: leftOutAnimation 0.4s linear;
+        overflow: hidden;
+        visibility: visible;
+        position: relative;
+        width: 100%;
+        height: 100%;
+        opacity: 1;
+    }
+
+    .fade-enter {
+        overflow: hidden;
+        visibility: hidden;
+        width: 100%;
+        opacity: 0;
+    }
+
+    .fade-leave-to {
+        overflow: hidden;
+        visibility: hidden;
+        width: 100%;
+        opacity: 0;
+    }
+    @keyframes leftInAnimation {
+        from {
+            transform: translateX(100%);
+            overflow: hidden;
+        }
+        to {
+            transform: translateX(0%);
+            overflow: hidden;
+        }
+    }
+    @keyframes leftOutAnimation {
+        from {
+            transform: translateX(100%);
+            overflow: hidden;
+        }
+        to {
+            transform: translateX(-100%);
+            overflow: hidden;
+        }
+    }
     p {
         line-height: 1.2rem;
     }
@@ -32,6 +84,29 @@ li.exp-preview {
                 transform: scale(1.15);
             }
         }
+    }
+    .arrows-container {
+        transform: translateY(-100px);
+        position: relative;
+        margin: -15px 10px;
+        display: flex;
+        justify-content: space-between;
+        &:hover {
+            cursor: pointer;
+        }
+        .next {
+            color: white;
+            -webkit-text-stroke: 0.7px black;
+            font-size: 20px;
+        }
+        .prev {
+            font-size: 20px;
+            color: white;
+            -webkit-text-stroke: 0.7px black;
+        }
+        // & :hover{
+        //     cursor: pointer;
+        // }
     }
     .exp-preview-type-ticket {
         display: flex;

@@ -30,7 +30,7 @@
         <button v-if="loggedinUser" :class="isOnProfile" @click="goToProfile">My Profile</button>
         <button :class="isOnExperiences" @click="goToExperiences">Experiences</button>
         <router-link v-if="!loggedinUser" to="/login">
-            <span @click="goToLogin" :class="isOnLogin">Login</span>
+            <span class="login-router" @click="goToLogin" :class="isOnLogin">Login</span>
         </router-link>
         <div v-else class="log-user">
             <button class="logout-btn" @click="logout">logout</button>
