@@ -48,6 +48,10 @@ export const userStore = {
         async updateUser({ commit }, { user }) {
             user = await userService.update(user);
             commit({ type: 'setUser', user })
-        }
+        },
+        async loadLoggedinUser({ commit ,state}) {
+            const user = await userService.getById(state.loggedinUser._id);
+            commit({ type: 'setUser', user })
+        },
     },
 }

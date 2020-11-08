@@ -66,6 +66,9 @@ function getEmptyExp() {
   return emptyExp
 }
 
+function saveExp(exp) {
+  return exp._id ? update(exp) : add(exp);
+}
 
 
 async function addParticipant(booked, exp, user) {
@@ -98,6 +101,3 @@ async function addReview(exp, review ,user){
 }
 
 
-function saveExp(exp) {
-  return exp._id ? update(exp) : add(exp);
-}

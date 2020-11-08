@@ -25,7 +25,7 @@
     <div class="router-header" :class="{openMenu: isMenuOpen}">
         <button @click="showNotificationsList" class="bell-btn" v-if="loggedinUser">
             <i class="fas fa-bell"></i>
-            <div :class="{visible: notifications.length}" class="msg">{{notifications.length}}</div>
+            <div :class="{visible: +notifications.length}" class="msg">{{notifications.length}}</div>
         </button>
         <button v-if="loggedinUser" :class="isOnProfile" @click="goToProfile">My Profile</button>
         <button :class="isOnExperiences" @click="goToExperiences">Experiences</button>
@@ -80,7 +80,7 @@ export default {
             };
         },
         notifications() {
-            return this.loggedinUser.notifications
+            return this.$store.getters.loggedinUser.notifications;
         }
     },
     methods: {
@@ -138,16 +138,12 @@ export default {
     created() {
         if (!this.loggedinUser) return;
         socket.setup();
-        socket.on(this.loggedinUser._id, (buyer) => {
-            const user = {
-                ...this.loggedinUser
-            }
-            user.notifications.push(buyer)
-            this.$store.commit({
-                type: "setUser",
-                user,
+        socket.on(this.loggedinUser._id, () => {
+            this.$store.dispatch({
+                type: "loadLoggedinUser",
             })
         });
+
     },
     components: {
         notifications

@@ -10,7 +10,8 @@ export const userService = {
     update,
     informSeller,
     getGuestUser,
-    getMiniUser
+    getMiniUser,
+    
 }
 
 

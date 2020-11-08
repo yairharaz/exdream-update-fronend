@@ -25,6 +25,9 @@ export default {
     },
     computed: {
 
+    },
+    created() {
+        console.log(this.notifications)
     }
 }
 </script>

@@ -59,10 +59,9 @@
 
             <button class="add-review-btn" @click.prevent="toggleReviewModal">
                 Add Review
-
             </button>
 
-            <review-details class="review-modal" v-show="isModalOpen" @closeModal="toggleReviewModal" />
+            <review-details class="review-modal" @saveReview="saveReview" v-show="isModalOpen" @closeModal="toggleReviewModal" />
 
             <ul v-if="exp.reviews.length > 0" class="review-list">
                 <exp-review v-for="review in expReviewsToShow" :key="review.id" :review="review" />
@@ -125,6 +124,9 @@ export default {
         };
     },
     computed: {
+        loggedinUser() {
+            return this.$store.getters.loggedinUser
+        },
         averageRate() {
             if (this.exp.reviews.length === 0) return;
             let sum = this.exp.reviews.reduce((acc, review) => {
@@ -156,11 +158,8 @@ export default {
                 exp: this.exp,
                 user,
             });
-            const connectDetails = {
-                sellerId: this.exp.createdBy._id,
-                buyer: user,
-            };
-            socket.emit("booking", connectDetails);
+            const sellerId = this.exp.createdBy._id;
+            socket.emit("booking", sellerId);
         },
         toggleMoreReading(ev) {
             this.readMore = !this.readMore;
@@ -182,12 +181,22 @@ export default {
         },
         closeImgCarousel() {
             this.isCarouselOpen = false
+        },
+        async saveReview(review) {
+            await expService.addReview(this.exp, review, this.loggedinUser);
+            const sellerId = this.exp.createdBy._id;
+            socket.emit("review", sellerId);
+            this.setExps();
+        },
+        async setExps() {
+            const expId = this.$route.params.id;
+            this.exp = await expService.getById(expId);
         }
     },
-    async created() {
+    created() {
         window.scrollTo(0, 0);
-        const expId = this.$route.params.id;
-        this.exp = await expService.getById(expId);
+        this.setExps()
+
         socket.setup();
         socket.on("update exp", async (msg) => {
             this.exp = await expService.getById(expId);

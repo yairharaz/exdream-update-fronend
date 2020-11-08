@@ -31,6 +31,8 @@ import {
 import {
     userService
 } from "../services/user.service.js";
+import socket from '../services/socket.service.js'
+
 export default {
     name: "review-details",
     data() {
@@ -44,23 +46,20 @@ export default {
         };
     },
     computed: {
-        loggedinUser() {
-            return this.$store.getters.loggedinUser
-        }
+
     },
     methods: {
-        async saveReview() {
+        saveReview() {
             if (!this.review.txt || !this.review.rate) return;
             this.review.rate = +this.review.rate;
-            await expService.addReview(this.exp, this.review, this.loggedinUser);
+            this.$emit('saveReview', this.review)
         },
         closeModal() {
             this.$emit("closeModal");
         },
     },
-    async created() {
-        var expId = this.$route.params.id;
-        this.exp = await expService.getById(expId);
+    created() {
+
     },
 };
 </script>
