@@ -95,7 +95,10 @@ export default {
             this.activeLink = "experiences";
             this.$store.commit({
                 type: "setFilter",
-                filterBy: {}
+                filterBy: {
+                    limit: 8,
+                    skip: 0
+                }
             });
             this.$router.push("/exp");
         },
@@ -131,11 +134,7 @@ export default {
             this.isNotificationsListOpen = !this.isNotificationsListOpen
         },
     },
-    // mounted() {
-    //     this.$root.$on('update loggedin user', () => {
-    //        
-    //     });
-    // },
+
     created() {
         if (!this.loggedinUser) return;
         socket.setup();

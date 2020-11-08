@@ -37,14 +37,20 @@ export default {
             return this.$store.getters.loggedinUser;
         },
         pageCount() {
-            return Math.ceil(this.$store.getters.numOfAllExps / 8);
+            return Math.ceil(this.$store.getters.expsCount / 8);
         },
     },
     methods: {
         setFilter(filterBy) {
+            this.filterBy = {
+                ...this.filterBy,
+                ...filterBy
+            }
             this.$store.commit({
                 type: "setFilter",
-                filterBy,
+                filterBy: {
+                    ...this.filterBy
+                }
             });
             this.$store.dispatch({
                 type: "loadExps",
@@ -55,6 +61,9 @@ export default {
                 type: "setExps",
                 exps: null,
             });
+            this.filterBy = {
+                ...this.$store.getters.filterBy
+            }
             this.filterBy.skip = (num - 1) * 8;
             this.setFilter({
                 ...this.filterBy,
@@ -63,14 +72,8 @@ export default {
     },
     created() {
         window.scrollTo(0, 0);
-        this.setFilter({
-            ...this.filterBy,
-        });
         this.$store.dispatch({
             type: "loadExps",
-        });
-        this.$store.dispatch({
-            type: "loadNumOfAllExps",
         });
     },
     components: {

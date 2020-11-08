@@ -14,7 +14,7 @@
         <div class="search-container">
             <input @change="searchExp" v-model="choosedType" list="exp-list" placeholder="Choose your next Experience" />
             <datalist id="exp-list">
-                <option v-for="type in expTypes" :key="type" :value="type" />
+                <option v-for="exptype in expTypes" :key="exptype" :value="exptype" />
             </datalist>
 
             <button class="search-btn" @click="searchExp">
@@ -70,7 +70,7 @@ export default {
             expTypes: [
                 "Ski",
                 "Skydiving",
-                "Bunjee",
+                "Bungee",
                 "Diving",
                 "Surffing",
                 "Rock Climb",
@@ -102,7 +102,11 @@ export default {
         goToExpApp(filterBy) {
             this.$store.commit({
                 type: "setFilter",
-                filterBy,
+                filterBy: {
+                    ...filterBy,
+                    limit: 8,
+                    skip: 0
+                },
             });
             this.$router.push("/exp");
         },
@@ -112,6 +116,8 @@ export default {
                 type: "setFilter",
                 filterBy: {
                     type: this.choosedType,
+                    limit: 8,
+                    skip: 0
                 },
             });
             this.$router.push("/exp");
