@@ -44,7 +44,9 @@ export default {
         setFilter(filterBy) {
             this.filterBy = {
                 ...this.filterBy,
-                ...filterBy
+                ...filterBy,
+                limit: 8,
+                skip:0
             }
             this.$store.commit({
                 type: "setFilter",
