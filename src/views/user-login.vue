@@ -36,9 +36,6 @@ export default {
             this.$router.push('/signup')
         }
     },
-    // created() {
-    //     console.log($v)
-    // },
 }
 </script>
 

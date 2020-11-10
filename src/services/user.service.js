@@ -40,13 +40,18 @@ async function update(user) {
 }
 
 async function login(userCred) {
-    const user = await HttpService.post('auth/login', userCred)
-    return _handleLogin(user)
+    try {
+        const user = await HttpService.post('auth/login', userCred)
+        return user
+    } catch (err){
+        throw err
+    }
+    // return _handleLogin(user)
 }
 
 async function signup(userCred) {
     const user = await HttpService.post('auth/signup', userCred)
-    return _handleLogin(user)
+    // return _handleLogin(user)
 }
 async function logout() {
     await HttpService.post('auth/logout');
@@ -82,10 +87,10 @@ function getGuestUser() {
     return user
 }
 
-function _handleLogin(user) {
-    sessionStorage.setItem('user', JSON.stringify(user))
-    return user;
-}
+// function _handleLogin(user) {
+//     sessionStorage.setItem('user', JSON.stringify(user))
+//     return user;
+// }
 
 function makeId(l = 5) {
     var text = "";

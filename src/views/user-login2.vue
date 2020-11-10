@@ -1,45 +1,53 @@
 <template>
-<form @submit.prevent="save">
-    <div class="label-input-container" :class="{ 'error': $v.userName.$error }">
-        <label class="">userName</label>
-        <input class="" v-model.trim="$v.userName.$model" />
+<section>
+    <h2>Login</h2>
+    <p class="isInvalid" v-if="isInvalid">Invalid userName or password </p>
 
-        <span class="" v-if="!$v.userName.required && $v.userName.$dirty">* field is required</span>
-        <span class="" v-if="!$v.userName.minLength">* userName must have at least {{$v.userName.$params.minLength.min}} letters.</span>
-    </div>
+    <form @submit.prevent="save">
+        <div class="label-input-container" :class="{ 'error': $v.userName.$error }">
+            <label class="">userName</label>
+            <input class="" v-model.trim="$v.userName.$model" />
 
-    <div class="label-input-container" :class="{ 'error': $v.password.$error }">
-        <label class="">password</label>
-        <input class="" v-model.trim="$v.password.$model" />
+            <span class="" v-if="!$v.userName.required && $v.userName.$dirty">* field is required</span>
+        </div>
 
-        <span class="" v-if="!$v.password.required && $v.password.$dirty">* field is required</span>
-        <span class="" v-if="!$v.password.minLength">* password must have at least {{$v.password.$params.minLength.min}} letters.</span>
-    </div>
+        <div class="label-input-container" :class="{ 'error': $v.password.$error }">
+            <label class="">password</label>
+            <input class="" v-model.trim="$v.password.$model" />
 
-    <input type="submit" value="save">
-    <button type="button" @click="cancel">cansel</button>
+            <span class="" v-if="!$v.password.required && $v.password.$dirty">* field is required</span>
+            <span class="" v-if="!$v.password.minLength">* password must have at least {{$v.password.$params.minLength.min}} letters.</span>
+        </div>
 
-</form>
+        <input type="submit" value="save">
+        <button type="button" @click="cancel">cansel</button>
+
+    </form>
+
+    <p>Not registered yet?</p>
+    <button @click="signup">Sign Up!</button>
+
+</section>
 </template>
 
 <script>
 import {
     required,
     minLength,
-    between
 } from 'vuelidate/lib/validators'
 
 export default {
     data() {
         return {
             userName: '',
-            password: ''
+            password: '',
+            isInvalid: false
         }
     },
     validations: {
         userName: {
             required,
-            minLength: minLength(4)
+            // minLength: minLength(4)
         },
         password: {
             required,
@@ -47,54 +55,73 @@ export default {
         }
     },
     methods: {
-        save() {
+        async save() {
             this.$v.$touch();
             if (this.$v.$invalid) return
-
-            // console.log('this.$v: ', this.$v);
-            // console.log('userName: ', this.$v.userName);
-            // console.log('password: ', this.$v.password);
+            try {
+                await this.$store.dispatch({
+                    type: 'login',
+                    userCred: {
+                        userName: this.userName,
+                        password: this.password
+                    }
+                })
+                this.$router.push('/')
+            } catch (err) {
+                if (err.response.data.error === "Invalid userName or password") {
+                    this.isInvalid = true
+                }
+            }
         },
+
         cancel() {
-            console.log('cansel')
+            this.$router.push('/')
+        },
+        signup() {
+            this.$router.push('/signup')
         }
     },
+    // created() {
+    //     console.log(this.$v)
+    // }
 
 }
 </script>
 
 <style lang="scss" scoped>
-form {
-    margin: 300px auto;
+section {
+    margin: 300px auto 0;
 
-    .label-input-container {
-        display: flex;
-        flex-direction: column;
+    form {
+        .label-input-container {
+            display: flex;
+            flex-direction: column;
 
-        span {
-            color: red;
+            span {
+                color: red;
+            }
         }
-    }
 
-    .error {
+        .error {
+            input {
+                box-shadow: 0 0 5px red;
+                padding: 3px 0px 3px 3px;
+                margin: 5px 1px 3px 0px;
+                border: 1px solid red;
+            }
+        }
+
         input {
-            box-shadow: 0 0 5px red;
-            padding: 3px 0px 3px 3px;
-            margin: 5px 1px 3px 0px;
-            border: 1px solid red;
-        }
-    }
+            &:focus {
+                outline: none;
+            }
 
-    input {
-        &:focus {
-            outline: none;
         }
 
     }
 
-    box-shadow: 0 0 5px rgba(81, 203, 238, 1);
-    padding: 3px 0px 3px 3px;
-    margin: 5px 1px 3px 0px;
-    border: 1px solid rgba(81, 203, 238, 1);
+    .isInvalid {
+        color: red;
+    }
 }
 </style>
