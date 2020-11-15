@@ -34,13 +34,17 @@ export const userStore = {
                 commit({ type: 'setUser', user })
                 return user
             } catch (err){
-                throw (err)
+                throw err
             }
         },
         async signup({ commit }, { userCred }) {
-            const user = await userService.signup(userCred);
-            commit({ type: 'setUser', user })
-            return user;
+            try{
+                const user = await userService.signup(userCred);
+                commit({ type: 'setUser', user });
+                return user;
+            } catch (err){
+                throw err
+            }
         },
         async logout({ commit }) {
             await userService.logout()

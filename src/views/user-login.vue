@@ -1,44 +1,87 @@
 <template>
 <section class="user-login">
-    <form class="login-form" @submit.prevent="login">
-        <input ref="input" class="login-user-name" type="text" placeholder="Please input user name" v-model="credentials.userName" />
-        <input class="login-password" type="password" placeholder="Please input password" v-model="credentials.password" show-password />
-        <button>Login</button>
+    <h2>Login</h2>
+    <p class="isInvalid" v-if="isInvalid">Invalid userName or password </p>
+
+    <form @submit.prevent="login">
+        <div class="label-input-container" :class="{ 'error': $v.userName.$error }">
+            <label class="">userName</label>
+            <input class="" v-model.trim="$v.userName.$model" />
+
+            <span class="" v-if="!$v.userName.required && $v.userName.$dirty">* field is required</span>
+        </div>
+
+        <div class="label-input-container" :class="{ 'error': $v.password.$error }">
+            <label class="">password</label>
+            <input class="" v-model.trim="$v.password.$model" />
+
+            <span class="" v-if="!$v.password.required && $v.password.$dirty">* field is required</span>
+            <span class="" v-if="!$v.password.minLength">* password must have at least {{$v.password.$params.minLength.min}} letters.</span>
+        </div>
+
+        <button class="login-btn">Login</button>
+
     </form>
+
     <p>Not registered yet?</p>
-    <button @click="signup">Sign Up!</button>
+    <button class="signup-btn" @click="signup">Sign Up!</button>
+
 </section>
 </template>
 
 <script>
 import {
-    userService
-} from '../services/user.service.js'
+    required,
+    minLength,
+} from 'vuelidate/lib/validators'
+
 export default {
     data() {
         return {
-            credentials: {
-                userName: '',
-                password: '',
-            },
+            userName: '',
+            password: '',
+            isInvalid: false
+        }
+    },
+    validations: {
+        userName: {
+            required,
+        },
+        password: {
+            required,
+            minLength: minLength(4)
         }
     },
     methods: {
         async login() {
-            await this.$store.dispatch({
-                type: 'login',
-                userCred: this.credentials
-            })
-            this.$root.$emit('update loggedin user')
+            this.$v.$touch();
+            if (this.$v.$invalid) return
+            try {
+                await this.$store.dispatch({
+                    type: 'login',
+                    userCred: {
+                        userName: this.userName,
+                        password: this.password
+                    }
+                })
+                this.$router.push('/')
+            } catch (err) {
+                if (err.response.data.error === "Invalid userName or password") {
+                    this.isInvalid = true
+                }
+            }
+        },
+
+        cancel() {
             this.$router.push('/')
         },
         signup() {
             this.$router.push('/signup')
         }
     },
+    // created() {
+    //     console.log(this.$v)
+    // }
+
 }
 </script>
-
-<style>
-
-</style>

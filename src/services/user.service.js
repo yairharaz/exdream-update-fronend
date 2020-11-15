@@ -11,7 +11,7 @@ export const userService = {
     informSeller,
     getGuestUser,
     getMiniUser,
-    
+
 }
 
 
@@ -19,7 +19,7 @@ export const userService = {
 
 // getUsers()
 // async function getUsers(){
-    //     const users = await HttpService.get(`user`) 
+//     const users = await HttpService.get(`user`) 
 //     users.forEach( async (user) => {
 //         user.notifications = []
 //         await update(user);
@@ -43,14 +43,19 @@ async function login(userCred) {
     try {
         const user = await HttpService.post('auth/login', userCred)
         return user
-    } catch (err){
+    } catch (err) {
         throw err
     }
     // return _handleLogin(user)
 }
 
 async function signup(userCred) {
-    const user = await HttpService.post('auth/signup', userCred)
+    try {
+        const user = await HttpService.post('auth/signup', userCred)
+        return user
+    } catch (err) {
+        throw err
+    }
     // return _handleLogin(user)
 }
 async function logout() {
@@ -60,23 +65,23 @@ async function logout() {
 
 async function informSeller(sellerId, { fullName, imgUrl }, type) {
     const seller = await getById(sellerId);
-    const desc = (type === 'review')? fullName +' left review': fullName + ' ordered from you' 
+    const desc = (type === 'review') ? fullName + ' left review' : fullName + ' ordered from you'
     seller.notifications.push({
         desc,
-        imgUrl, 
+        imgUrl,
         createdAt: Date.now()
     })
     await update(seller)
 }
 
-function getMiniUser(user){
-    return  {
-      _id: user._id,
-      fullName: user.fullName,
-      imgUrl: user.imgUrl,
-      createdAt: Date.now()
+function getMiniUser(user) {
+    return {
+        _id: user._id,
+        fullName: user.fullName,
+        imgUrl: user.imgUrl,
+        createdAt: Date.now()
     }
-  }
+}
 function getGuestUser() {
     const user = {
         _id: makeId(),
