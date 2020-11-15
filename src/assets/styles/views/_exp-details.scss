@@ -129,6 +129,16 @@
         padding-bottom: 20px;
         border-bottom: 1px solid lightgray;
         margin-bottom: 20px;
+        .exp-rate{
+            margin-bottom: 10px;
+        }
+        .add-review-btn {
+            display: block;
+            padding: 8px 15px;
+            background-color: #1e72e0;
+            border-radius: 5px;
+            color: white;
+        }
         .review-modal {
             min-width: 500px;
             display: flex;
@@ -152,8 +162,9 @@
         }
         .show-hide-review-btn {
             font-size: 14px;
-            transition: 0.15s;
+            transition: 0.2s;
             text-decoration: underline;
+            background-color: unset;
             &:hover {
                 color: #1e72e0;
             }

@@ -56,13 +56,10 @@
                 <i class="el-icon-star-on"></i>
                 {{ averageRate }} ({{ exp.reviews.length }}) reviews
             </p>
-
-            <button class="add-review-btn" @click.prevent="toggleReviewModal">
-                Add Review
+              <button class="add-review-btn" @click.prevent="toggleReviewModal">
+                 Add Review <i class="fas fa-user-plus"></i>
             </button>
-
-            <review-details class="review-modal" @saveReview="saveReview" v-show="isModalOpen" @closeModal="toggleReviewModal" />
-
+            <review-details  @saveReview="saveReview" v-show="isModalOpen" @closeModal="toggleReviewModal" />
             <ul v-if="exp.reviews.length > 0" class="review-list">
                 <exp-review v-for="review in expReviewsToShow" :key="review.id" :review="review" />
             </ul>
@@ -71,9 +68,9 @@
                 Show More...
             </a>
             <button @click="toggleReview" v-else class="show-hide-review-btn">
-                Hide
+                Hide...
             </button>
-        </div>
+            </div>
         <div class="exp-details-guide-container">
             <div>
                 <div class="guide-details">
