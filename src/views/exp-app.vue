@@ -70,6 +70,7 @@ export default {
             this.setFilter({
                 ...this.filterBy,
             });
+            window.scrollTo(0, 0);
         },
     },
     created() {

@@ -23,7 +23,8 @@
 @import 'components/footer-app';
 @import 'components/exp-review.scss';
 @import 'components/pagination.scss';
-@import './components/carusel';
+@import 'components/carusel';
+@import 'components/review-details.scss';
 
 // VIEWS
 
@@ -38,4 +39,3 @@
 @import 'views/exp-types';
 @import 'views/home';
 @import 'views/user-details';
-@import 'views/add-details.scss';
