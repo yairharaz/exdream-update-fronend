@@ -1,12 +1,12 @@
 <template>
 <section class="user-signup">
 
-    <h2>Signup</h2>
+    <h2>Sign-Up</h2>
 
     <form @submit.prevent="signup">
 
         <div class="label-input-container" :class="{ 'error': $v.fullName.$error }">
-            <label class="">fullName</label>
+            <label class="">FullName</label>
             <input class="" v-model.trim="$v.fullName.$model" />
 
             <span class="" v-if="!$v.fullName.required && $v.fullName.$dirty">* field is required</span>
@@ -14,7 +14,7 @@
         </div>
 
         <div class="label-input-container" :class="{ 'error': $v.email.$error }">
-            <label class="">email</label>
+            <label class="">Email</label>
             <input class="" v-model.trim="$v.email.$model" />
 
             <span class="" v-if="!$v.email.required && $v.email.$dirty">* field is required</span>
@@ -23,7 +23,7 @@
         </div>
 
         <div class="label-input-container" :class="{ 'error': $v.userName.$error }">
-            <label class="">userName</label>
+            <label class="">Username</label>
             <input class="" v-model.trim="$v.userName.$model" />
 
             <span class="" v-if="!$v.userName.required && $v.userName.$dirty">* field is required</span>
@@ -31,14 +31,14 @@
         </div>
 
         <div class="label-input-container" :class="{ 'error': $v.password.$error }">
-            <label class="">password</label>
+            <label class="">Password</label>
             <input class="" v-model.trim="$v.password.$model" />
 
             <span class="" v-if="!$v.password.required && $v.password.$dirty">* field is required</span>
             <span class="" v-if="!$v.password.minLength">* password must have at least {{$v.password.$params.minLength.min}} letters.</span>
         </div>
 
-        <button class="signup-btn">Signup</button>
+        <button class="signup-btn">Sign-Up</button>
     </form>
 
     <button class="cansel" @click="cansel">Cansel</button>

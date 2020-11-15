@@ -1,19 +1,19 @@
 <template>
 <section class="user-login">
     <h2>Login</h2>
-    <p class="isInvalid" v-if="isInvalid">Invalid userName or password </p>
+    <p class="isInvalid" v-if="isInvalid">Invalid username or password </p>
 
     <form @submit.prevent="login">
         <div class="label-input-container" :class="{ 'error': $v.userName.$error }">
-            <label class="">userName</label>
+            <label class="">Username</label>
             <input class="" v-model.trim="$v.userName.$model" />
 
             <span class="" v-if="!$v.userName.required && $v.userName.$dirty">* field is required</span>
         </div>
 
         <div class="label-input-container" :class="{ 'error': $v.password.$error }">
-            <label class="">password</label>
-            <input class="" v-model.trim="$v.password.$model" />
+            <label class="">Password</label>
+            <input type="password" class="" v-model.trim="$v.password.$model" />
 
             <span class="" v-if="!$v.password.required && $v.password.$dirty">* field is required</span>
             <span class="" v-if="!$v.password.minLength">* password must have at least {{$v.password.$params.minLength.min}} letters.</span>
@@ -24,7 +24,7 @@
     </form>
 
     <p>Not registered yet?</p>
-    <button class="signup-btn" @click="signup">Sign Up!</button>
+    <button class="signup-btn" @click="signup">Sign-Up!</button>
 
 </section>
 </template>
