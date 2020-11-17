@@ -18,6 +18,18 @@
         margin-inline-start: 7px;
         text-transform: capitalize;
     }
+    .no-exp{
+        text-align: center;
+        margin-top: 70px;
+        h3{
+            font-size: 60px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        h4{
+            font-size: 45px;
+        }
+    }
     @include for-wide-XL-layout{
         max-width: 980px;
             .exp-list {

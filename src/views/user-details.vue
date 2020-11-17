@@ -80,7 +80,10 @@ export default {
             this.user = await userService.getById(userId);
             this.loggedinUser = this.$store.getters.loggedinUser;
             try {
-                 this.exps = await expService.getExps({ userId: userId });
+                 
+                 const res = await expService.getExps({ userId: userId });
+                 console.log(res)
+                 this.exps = res.exps
             } catch (err) {
                 console.log("ERROR: cannot find exps");
                 throw err;

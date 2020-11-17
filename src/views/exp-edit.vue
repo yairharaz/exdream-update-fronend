@@ -1,15 +1,15 @@
 <template>
     <section class="exp-edit" v-if="expToEdit">
-        <h1>{{ (expToEdit._id) ? 'Edit exp' : 'Add exp' }}</h1>
+        <h1>{{ (expToEdit._id) ? 'Edit Experience' : 'Add Experience' }}</h1>
         <form class="form-edit-add" @submit.prevent="saveExp">
             <label>
                 Event Date:
-                <date-picker @setDay="setDay" :date="expToEdit.date" />
+                <date-picker  @setDay="setDay" :date="expToEdit.date" />
             </label>
             <label>
                 Location:
                 <el-input
-                    class="el-input"
+                    class="el-input "
                     required
                     placeholder="Experience location"
                     v-model="expToEdit.location"
@@ -18,7 +18,7 @@
             <label>
                 Title:
                 <el-input
-                    class="el-input"
+                    class="el-input "
                     required
                     placeholder="Experience title"
                     v-model="expToEdit.title"
@@ -27,27 +27,18 @@
             <label>
                 Type:
                 <el-select
-                    class="selector-type"
+                    class="selector-type "
                     required
                     v-model="expToEdit.type"
-                    placeholder="Choose Experience type"
-                >
-                    <el-option value="Ski">Ski</el-option>
-                    <el-option value="Diving">Diving</el-option>
-                    <el-option value="Rock-Climb">Rock-Climb</el-option>
-                    <el-option value="Surffing">Surffing</el-option>
-                    <el-option value="Bunjee">Bunjee</el-option>
-                    <el-option value="Sky Diving">Sky Diving</el-option>
-                    <el-option value="Motorcross">Motorcross</el-option>
-                    <el-option value="Rappelling">Snapling</el-option>
-                    <el-option value="Offroad">Snapling</el-option>
+                    placeholder="Choose Experience type">
+                    <el-option v-for="option in options1" :key="option" :value="option">{{option}}</el-option>
                 </el-select>
             </label>
             <label>
                 Upload/Have at least 5 images:
                 <p>{{loaded}}</p>
                 <input
-                    class="input-img"
+                    class="input-img "
                     :required="isNotEnoughImg"
                     type="file"
                     placeholder="Experience image"
@@ -63,7 +54,7 @@
                 </div>
             </div>
             <el-input
-                class="el-input-textarea"
+                class="el-input-textarea "
                 required
                 type="textarea"
                 :rows="2"
@@ -71,7 +62,7 @@
                 v-model="expToEdit.shortDesc"
             ></el-input>
             <el-input
-                class="el-input-textarea"
+                class="el-input-textarea "
                 required
                 type="textarea"
                 :rows="2"
@@ -79,14 +70,14 @@
                 v-model="expToEdit.desc"
             ></el-input>
             <label>
-                Capacity:
-                <el-input
-                    class="el-input-capacity"
+                Max participants:
+                <el-input-number
+                    class="el-input-capacity "
                     required
-                    type="number"
-                    placeholder="Max participants"
+                    controls-position="right"
+                    :min="1"
                     v-model="expToEdit.capacity"
-                ></el-input>
+                ></el-input-number>
             </label>
             <label>
                 Category:
@@ -94,34 +85,14 @@
                     class="multi-selector"
                     multiple
                     v-model="value1"
-                    placeholder="Choose Category"
-                >
-                    <el-option value="Family">Family</el-option>
-                    <el-option value="Children">Children</el-option>
-                    <el-option value="All level">All levels</el-option>
-                    <el-option value="Adventure">Adventure</el-option>
-                    <el-option value="Sports">Sports</el-option>
-                    <el-option value="Adults">Adults</el-option>
-                    <el-option value="Europe">Europe</el-option>
-                    <el-option value="Expert">Expert</el-option>
-                    <el-option value="Africa">Africa</el-option>
-                    <el-option value="Asia">Asia</el-option>
-                    <el-option value="Water">Water</el-option>
-                    <el-option value="Danger">Danger</el-option>
-                    <el-option value="Ropes">Ropes</el-option>
-                    <el-option value="View">View</el-option>
-                    <el-option value="Sun">Sun</el-option>
-                    <el-option value="Animals">Animals</el-option>
-                    <el-option value="Winter">Winter</el-option>
-                    <el-option value="All-year">All-year</el-option>
-                    <el-option value="Loud">Loud</el-option>
-                    <el-option value="Desert">Desert</el-option>
+                    placeholder="Choose Category"> 
+                     <el-option v-for="option in options2" :key="option" :value="option">{{option}}</el-option>
                 </el-select>
             </label>
             <label>
                 Price:
                 <el-input-number
-                    class="input-price"
+                    class="input-price "
                     v-model="expToEdit.origPrice"
                     controls-position="right"
                     :min="0"
@@ -131,28 +102,23 @@
             <label>
                 Price with discount:
                 <el-input-number
-                    class="input-price"
+                    class="input-price "
                     v-model="expToEdit.currPrice"
                     controls-position="right"
                     :min="0"
                     placeholder="currPrice"
                 ></el-input-number>
             </label>
-            <button class="btn-save" :disabled="disabled">Save</button>
-        </form>
         <div class="btn-container">
             <button
                 type="button"
-                @click="hasHistory() 
-        ? $router.go(-1) 
-        : $router.push('/')"
-                class="btn-back"
-            >
-                &laquo;
-                >Back
-            </button>
+                @click="back"
+                class="btn-back">
+                &laquo; Back </button>
             <button class="delete-exp" v-if="expToEdit._id" @click="removeExp">Delete</button>
+            <button class="btn-save" :disabled="disabled">Save</button>
         </div>
+        </form>
     </section>
 </template>
 
@@ -169,113 +135,23 @@ export default {
             loaded: "",
             loadCount: 0,
             expToEdit: null,
-            options: [
-                {
-                    value: "Option1",
-                    label: "Option1",
-                },
-                {
-                    value: "Option2",
-                    label: "Option2",
-                },
-                {
-                    value: "Option3",
-                    label: "Option3",
-                },
-                {
-                    value: "Option4",
-                    label: "Option4",
-                },
-                {
-                    value: "Option5",
-                    label: "Option5",
-                },
-                {
-                    value: "Option6",
-                    label: "Option6",
-                },
-                {},
-                {
-                    value: "Option7",
-                    label: "Option7",
-                },
-                {},
-                {
-                    value: "Option8",
-                    label: "Option8",
-                },
-                {},
-                {
-                    value: "Option9",
-                    label: "Option9",
-                },
-                {},
-                {
-                    value: "Option10",
-                    label: "Option10",
-                },
-                {},
-                {
-                    value: "Option11",
-                    label: "Option11",
-                },
-                {},
-                {
-                    value: "Option12",
-                    label: "Option12",
-                },
-                {},
-                {
-                    value: "Option13",
-                    label: "Option13",
-                },
-                {},
-                {
-                    value: "Option14",
-                    label: "Option14",
-                },
-                {},
-                {
-                    value: "Option15",
-                    label: "Option15",
-                },
-                {},
-                {
-                    value: "Option16",
-                    label: "Option16",
-                },
-                {
-                    value: "Option17",
-                    label: "Option17",
-                },
-                {
-                    value: "Option18",
-                    label: "Option18",
-                },
-                {
-                    value: "Option19",
-                    label: "Option19",
-                },
-                {
-                    value: "Option20",
-                    label: "Option20",
-                },
-            ],
+            options1: ['Ski','Diving' , 'Rock-Climb' ,'Surffing' ,'Bunjee' ,'Sky Diving', 'Motorcross' ,'Snapling' ,'Offroad'],
+            options2:['Family','Children','All level','Adventure','Sports','Adults','Europe','Expert','Africa','Asia','Water','Danger','Ropes','View','Sun','Animals','Winter','All-year','Loud','Desert'],
             value1: [],
         };
     },
-    components: {
-        datePicker,
-    },
+
+
     computed: {
         isNotEnoughImg() {
             return this.expToEdit.imgUrls < 5;
         },
     },
     methods: {
-        hasHistory() {
-            return window.history.length > 2;
+        back(){
+            (window.history.length > 2)? this.$router.go(-1) : this.$router.push('/')
         },
+      
         async loadExp() {
             let expId = this.$route.params.id;
             if (expId) {
@@ -342,6 +218,9 @@ export default {
         "$route.params.expId"() {
             this.loadExp();
         },
+    },
+    components: {
+        datePicker,
     },
 };
 </script>

@@ -58,7 +58,7 @@ function getEmptyExp() {
     tags: [],
     participants: [],
     location: "",
-    date: Date.now() + 60 * 60 * 1000 * 24 * (Math.floor(Math.random() * (60 - 1 + 1))),
+    date: Date.now(),
     capacity: "",
     imgUrls: [],
     reviews: []

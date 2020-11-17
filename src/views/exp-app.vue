@@ -7,8 +7,12 @@
     <fade-loader v-else class="fade-loader" :loading="true" :radius="'100px'" :color="'#1e72e0'" :height="'40px'" :width="'5px'">
     </fade-loader>
 
-    <paginate v-show="pageCount" :pageCount="pageCount" :clickHandler="paging" :prevText="'Prev'" :nextText="'Next'" :containerClass="'pagination'">
+    <paginate v-if="pageCount" :pageCount="pageCount" :clickHandler="paging" :prevText="'Prev'" :nextText="'Next'" :containerClass="'pagination'">
     </paginate>
+    <div class="no-exp" v-else> 
+        <h3>Ooopss!</h3>  
+        <h4>Not found any experience...</h4> 
+    </div>
 
 </section>
 </template>
@@ -41,12 +45,16 @@ export default {
         },
     },
     methods: {
-        setFilter(filterBy) {
+        setFilter(filterBy ,pagingSkip = 0) {
+            this.$store.commit({
+                type: "setExps",
+                exps: null,
+            });
             this.filterBy = {
                 ...this.filterBy,
                 ...filterBy,
-                limit: 8,
-                skip:0
+                skip: pagingSkip
+               
             }
             this.$store.commit({
                 type: "setFilter",
@@ -59,17 +67,11 @@ export default {
             });
         },
         paging(num) {
-            this.$store.commit({
-                type: "setExps",
-                exps: null,
-            });
             this.filterBy = {
                 ...this.$store.getters.filterBy
             }
-            this.filterBy.skip = (num - 1) * 8;
-            this.setFilter({
-                ...this.filterBy,
-            });
+            const pagingSkip = (num - 1) * 8;
+            this.setFilter({...this.filterBy} , pagingSkip);
             window.scrollTo(0, 0);
         },
     },
