@@ -1,7 +1,7 @@
 <template>
 <section class="user-login">
     <h2>Login</h2>
-    <p class="isInvalid" v-if="isInvalid">Invalid username or password </p>
+    <p class="isInvalid" v-if="isInvalid">Invalid username or password! </p>
 
     <form @submit.prevent="login">
         <div class="label-input-container" :class="{ 'error': $v.userName.$error }">

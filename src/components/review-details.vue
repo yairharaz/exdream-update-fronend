@@ -3,12 +3,9 @@
     <h2>Add Review</h2>
     <form class="add-review-form" @submit.prevent="saveReview">
         <el-input class="review-el-input" required type="textarea" :rows="2" placeholder="Please describe your experience.." v-model="review.txt"></el-input>
-        <div class="star-rate">
-        <p v-for="(star, idx) in stars" :key="star" @click="rate(idx)">
-            <i v-if="(review.rate > idx)" class="fas fa-star"></i>
-            <i v-if="(review.rate <= idx)" class="far fa-star"></i>
-        </p>
-        </div>
+       
+        <exp-rate :rate="review.rate" @updateRate="updateRate"></exp-rate>
+
         <div class="review-btn-container">
             <button type="button" @click="closeModal" class="btn-back btn">
                 &laquo; Back
@@ -20,13 +17,22 @@
 </template>
 
 <script>
+// <div class="star-rate">
+//         <p v-for="(star, idx) in stars" :key="star" @click="rate(idx)">
+//             <i v-if="(review.rate > idx)" class="fas fa-star"></i>
+//             <i v-if="(review.rate <= idx)" class="far fa-star"></i>
+//         </p>
+//         </div>
+
+
 import {
     expService
 } from "../services/exp.service.js";
 import {
     userService
 } from "../services/user.service.js";
-import socket from '../services/socket.service.js'
+import socket from '../services/socket.service.js';
+import expRate from './exp-rate.vue'
 
 export default {
     name: "review-details",
@@ -38,7 +44,6 @@ export default {
                 rate: 1,
 
             },
-            stars: [0,1,2,3,4],
         };
     },
     methods: {
@@ -53,12 +58,12 @@ export default {
         closeModal() {
             this.$emit("closeModal");
         },
-        rate(idx){
+        updateRate(idx){
            this.review.rate = idx + 1;
         }
     },
-    created() {
-
-    },
+    components: {
+        expRate,
+    }
 };
 </script>

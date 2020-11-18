@@ -12,11 +12,15 @@
       </div>
     </div>
     <p class="review-txt">{{review.txt}}</p>
+     <exp-rate class="star-rate" :rate="review.rate" />
   </li>
 </template>
 
 <script>
 import moment from "moment";
+import expRate from './exp-rate.vue';
+
+
 export default {
   name: "exp-review",
   props: ["review"],
@@ -27,6 +31,9 @@ export default {
     date() {
       return moment(this.review.at).format("MMMM YYYY");
     },
+  },
+  components: {
+    expRate
   }
 };
 </script>

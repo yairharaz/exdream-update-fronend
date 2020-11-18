@@ -1,6 +1,7 @@
 .exp-review{
     width: 50%;
     margin: 20px 0;
+
     .reviewer-container-wraper{
         display: flex;
         align-items: center;
@@ -20,9 +21,18 @@
     .review-txt{
         margin-inline-end: 20px;
         line-height: 20px;
-        margin-top: 10px;
+        margin: 10px 0 6px 0;
         font-size: 14px;
 
+    }
+    .star-rate {
+        display: flex;
+        color: #ffe050;
+        margin-bottom: 10px;
+        font-size: 13px;
+        i {
+            margin: 0 3px;
+        }
     }
 }
 

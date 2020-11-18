@@ -103,17 +103,18 @@
         }
     }
     @include for-narrow-layout {
-        width: 92%;
-        margin-inline-start: 4%;
-        margin-inline-end: 4%;
+        margin: 0 auto;
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: space-between;
         .filter-modal {
             width: 96%;
             position: fixed;
         }
         .filter-btn {
-            padding: 5px 14px;
-            font-size: 11px;
-            margin-inline-end: 6px;
+            font-size: 12px;
+            margin: 0 4px;
+            padding: 8px 18px;
         }
     }
 }

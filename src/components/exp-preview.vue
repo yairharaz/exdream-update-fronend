@@ -1,12 +1,5 @@
 <template>
 <li class="exp-preview container">
-
-    <!-- <carousel :imgUrls="exp.imgUrls">
-        <carousel-slide v-for="imgUrl in exp.imgUrls" :key="imgUrl" class="carousel-slider">
-            <img class="" :src="imgUrl" :alt="imgUrl">
-        </carousel-slide>
-    </carousel> -->
-
     <div @click="details" class="exp-preview-img">
         <img :src="exp.imgUrls[0]" />
     </div>

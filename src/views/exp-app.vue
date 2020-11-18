@@ -4,12 +4,12 @@
     <h2 class="app-title">choose an experience</h2>
     <exp-filter @setFilter="setFilter" />
     <exp-list v-if="exps" :exps="exps" :loggedinUser="loggedinUser" />
-    <fade-loader v-else class="fade-loader" :loading="true" :radius="'100px'" :color="'#1e72e0'" :height="'40px'" :width="'5px'">
+    <fade-loader v-if="!exps" class="fade-loader" :loading="true" :radius="'100px'" :color="'#1e72e0'" :height="'40px'" :width="'5px'">
     </fade-loader>
 
     <paginate v-if="pageCount" :pageCount="pageCount" :clickHandler="paging" :prevText="'Prev'" :nextText="'Next'" :containerClass="'pagination'">
     </paginate>
-    <div class="no-exp" v-else> 
+    <div class="no-exp" v-if="!pageCount && exps"> 
         <h3>Ooopss!</h3>  
         <h4>Not found any experience...</h4> 
     </div>
