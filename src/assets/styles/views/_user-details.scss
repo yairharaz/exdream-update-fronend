@@ -48,48 +48,11 @@
       }
     }
   }
-  .charts-container{
+  .charts-container {
     display: flex;
     justify-content: space-around;
-  }
-  .user-order-activities {
-    // display: flex;
-    // justify-content: space-between;
-    // > * {
-    //   width: 50%;
-    // }
-    .orders-list-container {
-      button {
-        font-size: 15px;
-        border-radius: 13px;
-        padding: 4.5px 14px;
-        margin: 0 13px;
-        border: none;
-        background-color: #1e72e0;
-        color: white;
-        &:hover {
-          background-color: #115aba;
-        }
-      }
-      h4 {
-        font-size: 30px;
-        margin-bottom: 15px;
-        text-decoration: underline;
-        font-weight: bold;
-      }
-      .ord-location-date {
-        list-style-type: initial;
-        margin-left: 18px;
-        line-height: 1.3;
-        font-size: 15.6px;
-      }
-    }
-    .activities-list-header {
-      font-size: 30px;
-      margin-bottom: 15px;
-      text-decoration: underline;
-      font-weight: bold;
-    }
+    align-items: center;
+    margin-bottom: 30px;
   }
   .user-activity-table {
     border-collapse: collapse;
@@ -192,13 +155,36 @@
       }
     }
   }
-  @include for-normal-layout{
+  @include for-normal-layout {
     max-width: 540px;
     padding: 0 15px;
-
+    .charts-container {
+      margin-inline-start: 10px;
+      flex-direction: column;
+    }
+    .doughnut-chart {
+      margin-bottom: 40px;
+    }
+  }
+  @include for-narrow-layout {
+      .user-details-container{ 
+      flex-direction: column;
+      align-items: center;
+      .user-details-name-info{
+        width: 80%;
+        margin-bottom: 10px;
+      }
+      .add-exp-btn-container {
+        margin-top: 10px;
+        align-self: center;
+      }
+        .user-details-img {
+          width: 50%;
+          height: unset;
+        }
+      }
+    .activities-list-container {
+      display: none;
+    }
   }
 }
-
-
-
-

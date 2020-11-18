@@ -1,6 +1,6 @@
 <template>
 <div class="activities-list-container">
-    <h4 class="activities-list-header">Activities:</h4>
+    <h3 class="activities-list-header">Activities:</h3>
     <table class="user-activity-table">
         <thead class="user-activity-thead">
             <tr class="user-activity-tr">
