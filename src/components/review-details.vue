@@ -17,14 +17,6 @@
 </template>
 
 <script>
-// <div class="star-rate">
-//         <p v-for="(star, idx) in stars" :key="star" @click="rate(idx)">
-//             <i v-if="(review.rate > idx)" class="fas fa-star"></i>
-//             <i v-if="(review.rate <= idx)" class="far fa-star"></i>
-//         </p>
-//         </div>
-
-
 import {
     expService
 } from "../services/exp.service.js";
@@ -42,9 +34,8 @@ export default {
             review: {
                 txt: "",
                 rate: 1,
-
             },
-        };
+        }
     },
     methods: {
         saveReview() {

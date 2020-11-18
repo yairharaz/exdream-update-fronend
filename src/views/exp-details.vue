@@ -117,7 +117,6 @@ export default {
             isModalOpen: false,
             imgIdx: 0,
             isCarouselOpen: false,
-            mySvg: require('../../public/img/icons/bubble-speech.svg')
         };
     },
     computed: {
@@ -206,7 +205,6 @@ export default {
         fadeLoader,
         carousel,
         carouselSlide
-
     },
 };
 </script>
