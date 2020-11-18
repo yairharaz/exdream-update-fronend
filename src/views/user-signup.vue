@@ -86,7 +86,6 @@ export default {
         async signup() {
             this.$v.$touch();
             if (this.$v.$invalid) return
-            console.log('signup')
             try {
                 await this.$store.dispatch({
                     type: 'signup',
@@ -109,6 +108,3 @@ export default {
 }
 </script>
 
-<style>
-
-</style>

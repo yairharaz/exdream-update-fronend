@@ -92,7 +92,6 @@ async function addReview(exp, review ,user){
   try {
     const updatedExp = await update(exp);
     await userService.informSeller(exp.createdBy._id , miniUser ,'review');
-    console.log(updatedExp) 
   } catch (err) {
     console.log(err)
     throw (err)

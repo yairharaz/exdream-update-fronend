@@ -5,20 +5,13 @@
         <tr class="user-order-tr">
           <th>Experience Name</th>
           <th>Experience Date</th>
-          <!-- <th>Number Ordered</th>
-          <th>Price/Person</th>
-          <th>Total Paid</th> -->
           <th>Order Date</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td>{{ord.exp.title}}</td>
-          <td class="center">{{expDate}}</td>
-          <!-- <td class="center">{{participant.numOfTickets}}</td>
-          <td class="center">{{exp.currPrice}}</td>
-          <td class="center">{{participant.numOfTickets * exp.currPrice}}</td> -->
-          <td>{{ order.createdAt | moment("dddd, MMMM Do YYYY, h:mm:ss a") }}</td>
+          <td class="center">{{expDate}}</td><td>{{ order.createdAt | moment("dddd, MMMM Do YYYY, h:mm:ss a") }}</td>
         </tr>
       </tbody>
     </table>

@@ -54,8 +54,6 @@
       }
     },
     mounted () {
-      // this.chartData.labels = this.getLabels()
-      // this.chartData.datasets[0].data = this.getData()
       this.renderChart(this.chartData, this.options)
     }
   }

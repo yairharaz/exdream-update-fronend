@@ -15,18 +15,6 @@ export const userService = {
 }
 
 
-// פונקציה שעוזרת לעדבן את כל המערך של היוזרים.
-
-// getUsers()
-// async function getUsers(){
-//     const users = await HttpService.get(`user`) 
-//     users.forEach( async (user) => {
-//         user.notifications = []
-//         await update(user);
-//     });
-// }
-
-
 async function getById(userId) {
     return await HttpService.get(`user/${userId}`)
 }
@@ -46,7 +34,6 @@ async function login(userCred) {
     } catch (err) {
         throw err
     }
-    // return _handleLogin(user)
 }
 
 async function signup(userCred) {
@@ -56,7 +43,6 @@ async function signup(userCred) {
     } catch (err) {
         throw err
     }
-    // return _handleLogin(user)
 }
 async function logout() {
     await HttpService.post('auth/logout');
@@ -92,10 +78,6 @@ function getGuestUser() {
     return user
 }
 
-// function _handleLogin(user) {
-//     sessionStorage.setItem('user', JSON.stringify(user))
-//     return user;
-// }
 
 function makeId(l = 5) {
     var text = "";

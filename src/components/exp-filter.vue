@@ -1,11 +1,9 @@
 <template>
 <section class="exp-filter">
-    <!-- <div class="filter-btn-container"> -->
     <button class="filter-btn" :class="isOnType" @click="setOption('type')">Type</button>
     <button class="filter-btn" :class="isOnLocation" @click="setOption('location')">Country</button>
     <button class="filter-btn" :class="isOnTags" @click="setOption('tags')">More filters</button>
     <button class="filter-btn" :class="isOnSortBy" @click="setOption('sortBy')">sort</button>
-    <!-- </div> -->
     <div v-show="filterOption" @click="close" class="screen"></div>
 
     <div v-show="(filterOption === 'type')" class="type-filter filter-modal">

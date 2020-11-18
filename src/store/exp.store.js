@@ -20,10 +20,6 @@ export const expStore = {
     }
   },
   mutations: {
-    // updateExp(state, { currExp }) {
-    //   const idx = state.exps.findIndex((experience) => experience._id === currExp._id);
-    //   state.exps.splice(idx, 1, currExp);
-    // },
     addExp(state, { exp }) {
       state.exps.push(exp);
     },
@@ -47,10 +43,6 @@ export const expStore = {
         console.log('ERR: ', err)
       }
     },
-    // async loadNumOfAllExps({ commit }) {
-    //   const numOfAllExps = await expService.getNumOfAllExps()
-    //   commit({ type: "setNumOfAllExps", numOfAllExps })
-    // },
     async removeExp({ commit }, { id }) {
       await expService.remove(id)
     },
@@ -59,10 +51,8 @@ export const expStore = {
       await orderService.addOrder(booked, exp, user);
     },
     async saveExp({ commit }, { exp }) {
-      // const type = (exp._id) ? 'updateExp' : 'addExp';
       if (!exp._id) exp.date = Date.now();
       const currExp = await expService.saveExp(exp)
-      // commit({ type, currExp })
       return currExp
     },
 

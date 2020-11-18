@@ -89,33 +89,5 @@ export default {
     },
 };
 
-// IF WE WONT TO DO CHANGE IN ALL ARRAY EXPS
 
-// setTimeout(() => {
-
-//     const exps1  = this.$store.getters.exps;
-//     const exps = [...exps1]
-
-//     exps.forEach(exp => {
-//         exp.reviews.forEach( review => {
-//             review.id = this.makeId();
-//             console.log(exp)
-//         })
-//         this.$store.dispatch({ type: "saveExp" , exp});
-//     })
-
-// setTimeout(() => {
-// console.log( )
-//     const exps1 = this.$store.getters.exps;
-//     const exps = [...exps1]
-
-//     exps.forEach(exp => {
-//         if (exp.date < Date.now()) exp.date += 2592000000
-//         this.$store.dispatch({
-//             type: "saveExp",
-//             exp
-//         })
-//     })
-
-// }, 2500)
 </script>
