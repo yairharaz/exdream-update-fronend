@@ -7,7 +7,7 @@
     flex-direction: column;
     max-width: 790px;
     margin: 0 auto;
-    padding-left: 10px;
+    padding: 0 10px;
     margin-top: 65px;
     padding-top: 10px;
     margin-bottom: 10px;
@@ -48,7 +48,7 @@
         margin: 7.5px 0;
         width: 120px;
     }
-  
+
     .btn-container {
         max-width: 900px;
         display: flex;
@@ -82,9 +82,17 @@
             &.delete-exp {
                 background-color: red;
                 &:hover {
-                    background-color:#ca0404;
+                    background-color: #ca0404;
                 }
             }
+        }
+    }
+    @include for-narrow-layout {
+        h1 {
+            font-size: 40px;
+        }
+        .multi-selector {
+            width: 340px;
         }
     }
 }

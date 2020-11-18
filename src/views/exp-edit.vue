@@ -18,7 +18,7 @@
             <label>
                 Title:
                 <el-input
-                    class="el-input "
+                    class="el-input"
                     required
                     placeholder="Experience title"
                     v-model="expToEdit.title"
@@ -140,7 +140,6 @@ export default {
             value1: [],
         };
     },
-
 
     computed: {
         isNotEnoughImg() {
