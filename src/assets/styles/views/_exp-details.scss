@@ -224,7 +224,6 @@
     @include for-wide-layout {
         max-width: 700px;
         .exp-details-header {
-            // margin-inline-start: 15px;
             .seller-top h4 {
                 font-size: 15px;
             }
@@ -321,11 +320,6 @@
     }
     @include for-narrow-layout {
         .exp-details-header {
-            // flex-direction: column-reverse;
-            // align-items: flex-start;
-            // .seller-top {
-            //     flex-direction: row-reverse;
-            // }
             .exp-title-container {
                 .exp-details-title {
                     font-size: 20px;

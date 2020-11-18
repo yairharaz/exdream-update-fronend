@@ -51,7 +51,6 @@ export default {
             activeLink: "home",
             isMenuOpen: false,
             notificationsX: 0,
-            notificationsY: 0,
             isNotificationsListOpen: false
         };
     },
@@ -122,19 +121,15 @@ export default {
                 type: "updateUser",
                 user: loggedinUser
             })
-
         },
         toggleMenu() {
             this.isMenuOpen = !this.isMenuOpen;
         },
         showNotificationsList(ev) {
-            this.notificationsX = ev.pageX;
-            this.notificationsY = ev.pageY;
-            console.log('Y : ', this.notificationsY)
+            this.notificationsX = ev.pageX -250;
             this.isNotificationsListOpen = !this.isNotificationsListOpen
         },
     },
-
     created() {
         if (!this.loggedinUser) return;
         socket.setup();
@@ -143,7 +138,6 @@ export default {
                 type: "loadLoggedinUser",
             })
         });
-
     },
     components: {
         notifications
