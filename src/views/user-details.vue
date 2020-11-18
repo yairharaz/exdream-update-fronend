@@ -17,8 +17,8 @@
         </div>
         <div v-if="exps" class="orders-container">
             <div class="charts-container">
-                <bar-chart :exps="exps" :width="300" :height="350"/>
-                <doughnut-chart :exps="exps" />
+                <bar-chart class="bar-chart" :exps="exps" :width="300" :height="400"/>
+                <doughnut-chart class="doughnut-chart" :exps="exps" />
             </div>
             <user-orders-table :exps="exps"/>
         </div>
