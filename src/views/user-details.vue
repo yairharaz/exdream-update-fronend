@@ -1,5 +1,13 @@
 <template>
     <section class="user-details" v-if="user">
+    <button
+            type="button"
+            @click="hasHistory() ? $router.go(-1) : $router.push('/')"
+            class="back-btn"
+            title="back"
+        >
+            <i class="fas fa-arrow-left"></i>
+        </button>
         <div class="user-details-container">
             <img
                 class="user-details-img"
@@ -23,13 +31,7 @@
             <user-orders-table :exps="exps"/>
         </div>
         <h2 v-else> No experience Yet </h2>
-        <button
-            type="button"
-            @click="hasHistory() ? $router.go(-1) : $router.push('/')"
-            class="back-btn"
-        >
-            &laquo; Back
-        </button>
+        
     </section>
 </template>
 
@@ -51,9 +53,6 @@ export default {
             user: null,
             ords: []
         };
-    },
-    edit(id) {
-        this.$router.push(`/exp/edit/${id}`);
     },
     methods: {
         hasHistory() {

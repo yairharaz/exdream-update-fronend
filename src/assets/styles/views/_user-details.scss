@@ -106,18 +106,18 @@
     margin: 20px;
   }
   .back-btn {
-    align-self: flex-end;
-    font-size: 15px;
+    align-self: flex-start;
+    font-size: 24px;
     border-radius: 13px;
-    padding: 8px 22px;
     margin-bottom: 5px;
     border: none;
-    background-color: #1e72e0;
-    color: white;
+    background-color: unset;
+    color: #504658;
     transition: 0.15s;
     position: relative;
+    margin-bottom: 15px;
     &:hover {
-      background-color: #115aba;
+      color: #37323b;
     }
   }
   @include for-wide-layout {
@@ -165,6 +165,9 @@
     .doughnut-chart {
       margin-bottom: 40px;
     }
+    .bar-chart{
+      margin-bottom: 20px;
+    }
   }
   @include for-narrow-layout {
       .user-details-container{ 
@@ -186,5 +189,10 @@
     .activities-list-container {
       display: none;
     }
+    .doughnut-chart{
+      max-width: 335px;
+      max-height: 335px;
+    }
+   
   }
 }
